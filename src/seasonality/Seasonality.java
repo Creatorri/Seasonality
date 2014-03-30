@@ -53,6 +53,8 @@ public class Seasonality extends JFrame{
     //Crops Clicked
     public static boolean[] clicked = new boolean[Crops.values().length];
     public static boolean update = false,resetPaint = false;
+    //Score
+    public static int score = 0;
     //Private Time Stuff
     private String[] timeo = new String[2];
     /**
@@ -87,6 +89,7 @@ public class Seasonality extends JFrame{
         ge.getDefaultScreenDevice().setFullScreenWindow(s);
     }
     public void paint(Graphics g){
+//        super.paint(g);
         if(s==null) return;
         if(gp!=null && gp.isVisible()){
             String[] time = new SimpleDateFormat("m:ss").format(Date.from(Instant.ofEpochMilli(timeLeft))).split(":");
@@ -98,14 +101,13 @@ public class Seasonality extends JFrame{
                 g.drawString(time[0]+":"+time[1], 30, 60);
                 timeo=time;
             }
-            if(update){
-                g.drawImage(new assets.LoadArt().createBufferedImage("InfoPanel.png", (int) (0.5*getWidth()), (int) (0.5*getHeight())), (int) (0.25*getWidth()), (int) (0.25*getHeight()), this);
-            }
             if(resetPaint){
                 g.drawImage(new assets.LoadArt().createBufferedImage("stand.jpg", getWidth(), getHeight()), 0, 0, this);
+                resetPaint=false;
+                update=false;
             }
         }
-        if(getWidth()==0 || getHeight()==0 || !isResizable() || o.isVisible() || w==getWidth() || h==getHeight()) return;
+        if(getWidth()==0 | getHeight()==0 | !isResizable() | o.isVisible() | w==getWidth() | h==getHeight()) return;
         w=getWidth();
         h=getHeight();
         if(mmp.isVisible()){
@@ -114,6 +116,9 @@ public class Seasonality extends JFrame{
         }
         if(gp.isVisible()){
             g.drawImage(new assets.LoadArt().createBufferedImage("stand.jpg", getWidth(), getHeight()), 0, 0, this);
+            if(update){
+                g.drawImage(new assets.LoadArt().createBufferedImage("InfoPanel.png", (int) (0.5*getWidth()), (int) (0.5*getHeight())), (int) (0.25*getWidth()), (int) (0.25*getHeight()), this);
+            }
         }
         for(int i=0;i<buttons.size();i++){
             if(buttons.get(i)==null | !buttons.get(i).parent.isVisible() || !buttons.get(i).visible) continue;
@@ -122,6 +127,9 @@ public class Seasonality extends JFrame{
                 buttons.get(i).addListener(mbi);
                 g.drawImage(buttons.get(i).img, buttons.get(i).x, buttons.get(i).y, this);
             }catch(Exception e){}
+        }
+        for(int i=0;i<aa.size();i++){
+            Seasonality.aa.get(i).setPos((int) (Seasonality.aaX.get(i)*Seasonality.s.getWidth()), (int) (Seasonality.aaY.get(i)*Seasonality.s.getHeight()), (int) (Seasonality.aasX.get(i)*Seasonality.s.getWidth()), (int) (Seasonality.aasY.get(i)*Seasonality.s.getHeight()));
         }
         g.dispose();
     }

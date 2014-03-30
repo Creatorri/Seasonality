@@ -32,6 +32,21 @@ public class Gameplay extends JPanel{
         Seasonality.placeY.add(0.95);
         Seasonality.sizeX.add(0.2);
         Seasonality.sizeY.add(0.1);
+        Seasonality.buttons.get(Seasonality.buttons.size()-1).setVisible(true);
+        
+        Seasonality.buttons.add(new MButton(750/2,10,100,50,"Pick Up",this));
+        Seasonality.placeX.add(0.30);
+        Seasonality.placeY.add(0.75);
+        Seasonality.sizeX.add(0.1);
+        Seasonality.sizeY.add(0.05);
+        Seasonality.buttons.get(Seasonality.buttons.size()-1).setVisible(false);
+        
+        Seasonality.buttons.add(new MButton(750/2,10,100,50,"Put Back",this));
+        Seasonality.placeX.add(0.70);
+        Seasonality.placeY.add(0.75);
+        Seasonality.sizeX.add(0.1);
+        Seasonality.sizeY.add(0.05);
+        Seasonality.buttons.get(Seasonality.buttons.size()-1).setVisible(false);
         
         Seasonality.aa.add(new ActionArea(1,1,1,1,Crops.Beans.toString(),this));
         Seasonality.aaX.add(.37604166666666666);

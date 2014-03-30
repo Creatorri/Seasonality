@@ -18,11 +18,9 @@ public class MouseInput implements MouseListener{
     public void mousePressed(MouseEvent e) {
         mx=e.getX();
         my=e.getY();
-        for (int i=0;i<Seasonality.aa.size();i++) {
-            if (!Seasonality.aa.get(i).parent.isVisible()) continue;
-            Seasonality.aa.get(i).addListener(Seasonality.mbi);
-            Seasonality.aa.get(i).setPos((int) (Seasonality.aaX.get(i)*Seasonality.s.getWidth()), (int) (Seasonality.aaY.get(i)*Seasonality.s.getHeight()), (int) (Seasonality.aasX.get(i)*Seasonality.s.getWidth()), (int) (Seasonality.aasY.get(i)*Seasonality.s.getHeight()));
-            if (Seasonality.aa.get(i).update(mx, my)) return;
+        for (ActionArea aa : Seasonality.aa) {
+            if (!aa.parent.isVisible()) continue;
+            if (aa.update(mx, my)) return;
         }
         for (MButton button : Seasonality.buttons) {
             if (!button.visible || !button.parent.isVisible()) continue;

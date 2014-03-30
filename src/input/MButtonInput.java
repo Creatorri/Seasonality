@@ -10,14 +10,16 @@ import seasonality.Seasonality;
  * @author Torri
  */
 public class MButtonInput {
-    public boolean backtogame;
+//    public boolean backtogame;
     public void clicked(String command,Component parent){
-        System.out.println("MBUTTON:"+command);
+//        System.out.println("MBUTTON:"+command);
         if(parent==Seasonality.mmp){
             if(command.equalsIgnoreCase("Start Game")){
                 Seasonality.mmp.setVisible(false);
                 Seasonality.gp.setVisible(true);
                 Seasonality.gp.startGame(5);
+                Seasonality.update=false;
+                Seasonality.score=0;
                 Seasonality.w=0;
                 Seasonality.h=0;
                 Seasonality.s.repaint();
@@ -41,6 +43,12 @@ public class MButtonInput {
                 if(command.equalsIgnoreCase(Crops.values()[i].toString())){
                     Seasonality.clicked[i]=true;
                     Seasonality.update=true;
+                    for(MButton m : Seasonality.buttons){
+                        if(m.name.equalsIgnoreCase("Pick Up") | m.name.equalsIgnoreCase("Put Back")) m.setVisible(true);
+                    }
+                    Seasonality.w=0;
+                    Seasonality.h=0;
+                    Seasonality.s.repaint();
                 }
             }
         }

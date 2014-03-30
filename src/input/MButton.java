@@ -59,8 +59,10 @@ public class MButton {
         g.drawString(name, sx/2-width/2, (sy/2)+((sy/div)/2));
         g.dispose();
     }
+    public void setVisible(boolean show){
+        visible=show;
+    }
     public void addListener(MButtonInput mbi1){
-        visible=true;
         if(!isListened){
             mbi=mbi1;
             isListened=true;
