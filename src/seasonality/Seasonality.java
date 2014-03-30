@@ -103,6 +103,9 @@ public class Seasonality extends JFrame{
             }
             if(resetPaint){
                 g.drawImage(new assets.LoadArt().createBufferedImage("stand.jpg", getWidth(), getHeight()), 0, 0, this);
+                for(MButton m : Seasonality.buttons){
+                    if(m.name.equalsIgnoreCase("Pick Up") | m.name.equalsIgnoreCase("Put Back")) m.setVisible(false);
+                }
                 resetPaint=false;
                 update=false;
             }

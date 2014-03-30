@@ -18,7 +18,7 @@ public class MButtonInput {
                 Seasonality.mmp.setVisible(false);
                 Seasonality.gp.setVisible(true);
                 Seasonality.gp.startGame(5);
-                Seasonality.update=false;
+                Seasonality.resetPaint=true;
                 Seasonality.score=0;
                 Seasonality.w=0;
                 Seasonality.h=0;
