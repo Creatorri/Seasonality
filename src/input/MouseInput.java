@@ -26,7 +26,7 @@ public class MouseInput implements MouseListener{
             if (!button.visible || !button.parent.isVisible()) continue;
             if (button.update(mx, my)) return;
         }
-        System.out.println(((double) mx/(double) Seasonality.s.getWidth())+","+((double) my/(double) Seasonality.s.getHeight()));
+//        System.out.println(((double) mx/(double) Seasonality.s.getWidth())+","+((double) my/(double) Seasonality.s.getHeight()));
     }
     @Override
     public void mouseReleased(MouseEvent e) {}

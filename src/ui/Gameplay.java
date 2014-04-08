@@ -3,6 +3,7 @@ package ui;
 
 import input.ActionArea;
 import input.MButton;
+import java.util.concurrent.TimeUnit;
 import javax.swing.JPanel;
 import seasonality.Crops;
 import seasonality.Seasonality;
@@ -12,20 +13,7 @@ import seasonality.Seasonality;
  * @author Torri
  */
 public class Gameplay extends JPanel{
-    public Thread countDown = new Thread("Countdown"){
-        public void run(){
-            while(Seasonality.timeLeft>0){
-                Seasonality.timeLeft--;
-                Seasonality.s.repaint();
-                try {sleep(1);} catch (InterruptedException ex) {}
-            }
-            Seasonality.gp.setVisible(false);
-            Seasonality.mmp.setVisible(true);
-            Seasonality.w=0;
-            Seasonality.h=0;
-            Seasonality.s.repaint();
-        }
-    };
+    public Thread countDown = new Thread("Countdown");
     public Gameplay(){
         Seasonality.buttons.add(new MButton(750/2,10,100,50,"Back To Menu",this));
         Seasonality.placeX.add(0.9);
@@ -63,10 +51,12 @@ public class Gameplay extends JPanel{
         Seasonality.timeLeft = (long) (mins*60000);
         countDown = new Thread("Countdown"){
             public void run(){
+                int s = (int) (System.currentTimeMillis()/1000);
                 while(Seasonality.timeLeft>0){
+                    if(s==(System.currentTimeMillis()/1000)) continue;
+                    s=(int) (System.currentTimeMillis()/1000);
                     Seasonality.timeLeft--;
                     Seasonality.s.repaint();
-                    try {sleep(1);} catch (InterruptedException ex) {}
                 }
                 Seasonality.gp.setVisible(false);
                 Seasonality.mmp.setVisible(true);

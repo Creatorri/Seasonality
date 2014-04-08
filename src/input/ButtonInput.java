@@ -19,7 +19,6 @@ public class ButtonInput implements ActionListener{
             Seasonality.o.setVisible(false);
             Seasonality.mmp.setVisible(true);
             Seasonality.s.setResizable(true);
-            Seasonality.s.setExtendedState(JFrame.MAXIMIZED_BOTH);
             Seasonality.s.fullScreen();
             Seasonality.w=0;
             Seasonality.h=0;

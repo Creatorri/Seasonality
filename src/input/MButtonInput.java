@@ -39,6 +39,10 @@ public class MButtonInput {
                 Seasonality.h=0;
                 Seasonality.s.repaint();
             }
+            if(command.equalsIgnoreCase("put back")){
+                Seasonality.resetPaint=true;
+                Seasonality.s.repaint();
+            }
             for(int i=0;i<Crops.values().length;i++){
                 if(command.equalsIgnoreCase(Crops.values()[i].toString())){
                     Seasonality.clicked[i]=true;

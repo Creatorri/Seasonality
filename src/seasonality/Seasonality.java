@@ -57,6 +57,7 @@ public class Seasonality extends JFrame{
     public static int score = 0;
     //Private Time Stuff
     private String[] timeo = new String[2];
+    private String[] time;
     /**
      * @param args the command line arguments
      */
@@ -85,15 +86,17 @@ public class Seasonality extends JFrame{
         add(gp);
     }
     public void fullScreen(){
-        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        ge.getDefaultScreenDevice().setFullScreenWindow(s);
+//        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+//        ge.getDefaultScreenDevice().setFullScreenWindow(s);
     }
     public void paint(Graphics g){
-//        super.paint(g);
         if(s==null) return;
+        //gamestuff
         if(gp!=null && gp.isVisible()){
-            String[] time = new SimpleDateFormat("m:ss").format(Date.from(Instant.ofEpochMilli(timeLeft))).split(":");
-            if(time[1] == null ? timeo[1] == null : !time[0].equals(timeo[1])){
+            time = new SimpleDateFormat("m:ss").format(Date.from(Instant.ofEpochMilli(timeLeft))).split(":");
+            if(time[1] == null ? timeo[1] == null : !time[1].equals(timeo[1])){
+                System.out.println("IT GOES");
+                g.clearRect(30, 15, 100, 50);
                 g.setColor(Color.BLACK);
                 g.fillRect(30, 15, 100, 50);
                 g.setColor(Color.WHITE);
@@ -102,7 +105,8 @@ public class Seasonality extends JFrame{
                 timeo=time;
             }
             if(resetPaint){
-                g.drawImage(new assets.LoadArt().createBufferedImage("stand.jpg", getWidth(), getHeight()), 0, 0, this);
+                w=0;
+                h=0;
                 for(MButton m : Seasonality.buttons){
                     if(m.name.equalsIgnoreCase("Pick Up") | m.name.equalsIgnoreCase("Put Back")) m.setVisible(false);
                 }
@@ -110,6 +114,7 @@ public class Seasonality extends JFrame{
                 update=false;
             }
         }
+        //Normal and ui stuff
         if(getWidth()==0 | getHeight()==0 | !isResizable() | o.isVisible() | w==getWidth() | h==getHeight()) return;
         w=getWidth();
         h=getHeight();

@@ -13,10 +13,7 @@ public class ActionArea extends MButton{
         img=null;
     }
     public void setPos(int x1,int y1,int sx1,int sy1){
-        x=x1;
-        y=y1;
-        sx=sx1;
-        sy=sy1;
+        super.setPos(x1, y1, sx1, sy1);
         img=null;
     }
 }
