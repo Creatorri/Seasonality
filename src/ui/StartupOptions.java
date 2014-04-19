@@ -1,13 +1,14 @@
-
 package ui;
 
 import java.awt.image.BufferedImage;
 import seasonality.Seasonality;
+
 /**
  *
  * @author Torri
  */
 public class StartupOptions extends javax.swing.JPanel {
+
     BufferedImage back;
 
     /**
@@ -82,7 +83,6 @@ public class StartupOptions extends javax.swing.JPanel {
                 .addGap(327, 327, 327))
         );
     }// </editor-fold>//GEN-END:initComponents
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox crop;
