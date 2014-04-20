@@ -19,7 +19,7 @@ public class MainMenuPanel extends JPanel {
         Seasonality.buttons.get(Seasonality.buttons.size() - 1).setVisible(true);
         Seasonality.buttons.get(Seasonality.buttons.size() - 1).addListener(Seasonality.mbi);
 
-        Seasonality.buttons.add(new MButton(750 / 2, 10, 100, 50, "NYI", this));
+        Seasonality.buttons.add(new MButton(750 / 2, 10, 100, 50, "Options(Not Working Yet)", this));
         Seasonality.placeX.add(0.5);
         Seasonality.placeY.add(0.55);
         Seasonality.sizeX.add(0.2);

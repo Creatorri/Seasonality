@@ -8,40 +8,42 @@ import java.time.Month;
  */
 public enum Crops {
 
-    Asparagus(3.5, 5.5),
-    Beans(6, 10),
-    Beets(5, 11),
-    Spring_Broccoli(5.5, 6.5),
-    Fall_Broccoli(8, 11),
-    Carrots(6, 11),
-    Corn(6, 9.5),
-    Cucumber(6, 8.5),
-    Lettuce(4, 11),
-    Mushrooms(0, 0),
-    Peas(5, 6),
-    Sweet_Peppers(7, 11),
-    Potatoes(6, 12),
-    Pumpkins(8, 12),
-    Radishes(5, 11),
-    Rhubarb(3.5, 6),
-    Sweet_Poatoes(8.5, 12),
-    Tomatoes(5.5, 10),
-    Apples(7, 11),
-    Blackberries(5, 7),
-    Blueberries(5, 7.5),
-    Peaches(6, 9),
-    Pears(7, 9),
-    Raspberries(5, 10),
-    Strawberries(3.5, 6);
+    Asparagus(3.5, 5.5, null),
+    Beans(6, 10, null),
+    Beets(5, 11, null),
+    Spring_Broccoli(5.5, 6.5, null),
+    Fall_Broccoli(8, 11, null),
+    Carrots(6, 11, null),
+    Corn(6, 9.5, null),
+    Cucumber(6, 8.5, null),
+    Lettuce(4, 11, null),
+    Mushrooms(0, 0, null),
+    Peas(5, 6, null),
+    Sweet_Peppers(7, 11, null),
+    Potatoes(6, 12, null),
+    Pumpkins(8, 12, null),
+    Radishes(5, 11, null),
+    Rhubarb(3.5, 6, null),
+    Sweet_Poatoes(8.5, 12, null),
+    Tomatoes(5.5, 10, null),
+    Apples(7, 11, null),
+    Blackberries(5, 7, null),
+    Blueberries(5, 7.5, null),
+    Peaches(6, 9, null),
+    Pears(7, 9, null),
+    Raspberries(5, 10, null),
+    Strawberries(3.5, 6, null);
     //month 0 is jan
-    private final double start;
-    private final double end;
-    public int forceSeason = 0;//0 is use whatever is true, 1 is force false, 2 is force true
+    private final double START;
+    private final double END;
+    private final String[] DESCRIPTION;
+    public int forceSeason = 0;//0 is use actual data, 1 is force false, 2 is force true
 
-    private Crops(final double startMonth, final double endMonth) {
-        start = startMonth;
-        end = endMonth;
-        if (start == end) {
+    private Crops(final double startMonth, final double endMonth, final String[] data) {
+        START = startMonth;
+        END = endMonth;
+        DESCRIPTION = data;
+        if (START == END) {
             forceSeason = 2;
         }
     }
@@ -56,7 +58,7 @@ public enum Crops {
      * @return
      */
     public double getStartMonth() {
-        return start;
+        return START;
     }
 
     /**
@@ -65,12 +67,12 @@ public enum Crops {
      * @return
      */
     public double getEndMonth() {
-        return end;
+        return END;
     }
 
     public boolean inSeason(Month m) {
         int mon = m.getValue() - 1;
-        return forceSeason == 0 ? (mon >= start && mon < end) : (forceSeason != 1);
+        return forceSeason == 0 ? (mon >= START && mon < END) : (forceSeason != 1);
     }
 
     /**
@@ -80,9 +82,23 @@ public enum Crops {
      * @return
      */
     public boolean inSeason(double m) {
-        return forceSeason == 0 ? (m >= start && m <= end) : (forceSeason != 1);
+        return forceSeason == 0 ? (m >= START && m <= END) : (forceSeason != 1);
     }
 
+    /**
+     * Data
+     *
+     * @return
+     */
+    public String[] getDescription() {
+        return DESCRIPTION;
+    }
+
+    /**
+     * Gets String format of value
+     *
+     * @return
+     */
     public String toString() {
         String[] s = super.toString().split("_");
         if (s.length == 1) {
