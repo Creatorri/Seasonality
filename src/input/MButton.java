@@ -78,10 +78,18 @@ public class MButton {
         boolean go = (mx > x + 8 && mx < x + sx && my > y && my < y + sy && parent.isVisible() && visible);
         if (go) {
             if (data != null) {
-                mbi.clicked(name + data, parent);
+                try {
+                    mbi.clicked(name + data, parent);
+                } catch (Exception ex) {
+                    System.err.println(ex.getMessage());
+                }
             }
             if (data == null) {
-                mbi.clicked(name, parent);
+                try {
+                    mbi.clicked(name, parent);
+                } catch (Exception ex) {
+                    System.err.println(ex.getMessage());
+                }
             }
         }
         return go;

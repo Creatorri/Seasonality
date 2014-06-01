@@ -1,7 +1,6 @@
 package input;
 
 import java.awt.Component;
-import java.time.Month;
 import java.util.Calendar;
 import seasonality.Crops;
 import seasonality.Seasonality;
@@ -15,7 +14,7 @@ public class MButtonInput {
 
     public String lastCommand;
 
-    public void clicked(String command, Component parent) {
+    public void clicked(String command, Component parent) throws Exception {
         if (lastCommand == null ? command == null : lastCommand.equals(command)) {
             return;
         }
@@ -23,6 +22,7 @@ public class MButtonInput {
         lastCommand = command;
         if (parent == Seasonality.mmp) {
             if (command.equalsIgnoreCase("Start Game")) {
+                Seasonality.mi.clicked=false;
                 Seasonality.mmp.setVisible(false);
                 Seasonality.gp.setVisible(true);
                 Seasonality.gp.startGame(1);
@@ -33,13 +33,14 @@ public class MButtonInput {
             }
             if (command.equalsIgnoreCase("Quit")) {
                 Seasonality.s.dispose();
+                System.exit(0);
+                return;
             }
         }
         if (parent == Seasonality.gp) {
             if (command.equalsIgnoreCase("Back To Menu")) {
+                Seasonality.mi.clicked=false;
                 Seasonality.gp.stopGame();
-                Seasonality.mmp.setVisible(true);
-                Seasonality.gp.setVisible(false);
                 Seasonality.s.render();
                 return;
             }

@@ -88,7 +88,7 @@ public class Seasonality extends JFrame {
     }
     public BufferedImage img;
 
-    public void render() {
+    public void render() throws Exception{
 
         if (o.isVisible()) {
             return;
@@ -115,20 +115,20 @@ public class Seasonality extends JFrame {
 
             g.drawImage(new assets.LoadArt().createBufferedImage("stand.jpg", getWidth(), getHeight()), 0, 0, this);
             g.setColor(Color.BLACK);
-            g.fillRect(30, 15, 100, 50);
+            g.fillRect((int) (getHeight()*(30.0/1080.0)), (int) (getHeight()*(15.0/1080.0)), (int) (getHeight()*(100.0/1080.0)), (int) (getHeight()*(50.0/1080.0)));
             g.setColor(Color.WHITE);
-            g.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 50));
+            g.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, (int) (getHeight()*(50.0/1080.0))));
             if ((timeLeft - ((timeLeft / 60) * 60)) >= 10) {
-                g.drawString((timeLeft / 60) + ":" + (timeLeft - ((timeLeft / 60) * 60)), 30, 60);
+                g.drawString((timeLeft / 60) + ":" + (timeLeft - ((timeLeft / 60) * 60)), (int) (getHeight()*(30.0/1080.0)), (int) (getHeight()*(60.0/1080.0)));
             }
             if ((timeLeft - ((timeLeft / 60) * 60)) < 10) {
-                g.drawString((timeLeft / 60) + ":0" + (timeLeft - ((timeLeft / 60) * 60)), 30, 60);
+                g.drawString((timeLeft / 60) + ":0" + (timeLeft - ((timeLeft / 60) * 60)), (int) (getHeight()*(30.0/1080.0)), (int) (getHeight()*(60.0/1080.0)));
             }
 
             g.setColor(Color.BLACK);
-            g.fillRect(30, 75, g.getFontMetrics().stringWidth("Score: " + score), 50);
+            g.fillRect((int) (getHeight()*(30.0/1080.0)), (int) (getHeight()*(75.0/1080.0)), g.getFontMetrics().stringWidth("Score: " + score), (int) (getHeight()*(52.0/1080.0)));
             g.setColor(Color.WHITE);
-            g.drawString("Score: " + score, 30, 120);
+            g.drawString("Score: " + score, (int) (getHeight()*(30.0/1080.0)), (int) (getHeight()*(120.0/1080.0)));
 
             if (resetPaint) {
                 for (MButton m : Seasonality.buttons) {
@@ -140,8 +140,17 @@ public class Seasonality extends JFrame {
                 update = false;
             }
 
+            g.setColor(Color.BLACK);
             if (update) {
-                g.drawImage(new assets.LoadArt().createBufferedImage("InfoPanel.png", (int) (0.5 * getWidth()), (int) (0.5 * getHeight())), (int) (0.25 * getWidth()), (int) (0.25 * getHeight()), this);
+                g.drawImage(new assets.LoadArt().createBufferedImage("InfoPanel.png", (int) (0.55 * getWidth()), (int) (0.5 * getHeight())), (int) (0.225 * getWidth()), (int) (0.25 * getHeight()), this);
+                for(int i=0;i<clicked.length;i++){
+                    if(clicked[i]){
+                        g.drawString(Crops.values()[i].name(), (int) (0.25 * getWidth())+10, (int) (0.25 * getHeight())+(int) (getHeight()*(50.0/1080.0)));
+                        for(int j=0;j<Crops.values()[i].getDescription().length;j++){
+                            g.drawString(Crops.values()[i].getDescription()[j], (int) (0.25 * getWidth())+10, (int) (0.25 * getHeight())+(int) (getHeight()*(50.0/1080.0))*(j+2));
+                        }
+                    }
+                }
             }
         }
 
@@ -168,7 +177,11 @@ public class Seasonality extends JFrame {
         if (s == null) {
             return;
         }
-        render();
+        try {
+            render();
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+        }
         g.dispose();
     }
 }

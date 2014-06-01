@@ -8,38 +8,38 @@ import java.time.Month;
  */
 public enum Crops {
 
-    Asparagus(3.5, 5.5, null),
-    Beans(6, 10, null),
-    Beets(5, 11, null),
-    Spring_Broccoli(5.5, 6.5, null),
-    Fall_Broccoli(8, 11, null),
-    Carrots(6, 11, null),
-    Corn(6, 9.5, null),
-    Cucumber(6, 8.5, null),
-    Lettuce(4, 11, null),
-    Mushrooms(0, 0, null),
-    Peas(5, 6, null),
-    Sweet_Peppers(7, 11, null),
-    Potatoes(6, 12, null),
-    Pumpkins(8, 12, null),
-    Radishes(5, 11, null),
-    Rhubarb(3.5, 6, null),
-    Sweet_Poatoes(8.5, 12, null),
-    Tomatoes(5.5, 10, null),
-    Apples(7, 11, null),
-    Blackberries(5, 7, null),
-    Blueberries(5, 7.5, null),
-    Peaches(6, 9, null),
-    Pears(7, 9, null),
-    Raspberries(5, 10, null),
-    Strawberries(3.5, 6, null);
+    Asparagus(3.5, 5.5, "Stuff"),
+    Beans(6, 9, "Beans are beans because beans.", "in season from July to October"),
+    Beets(5, 11, "Stuff"),
+    Spring_Broccoli(5.5, 6.5, "Stuff"),
+    Fall_Broccoli(8, 11, "Stuff"),
+    Carrots(6, 11, "Stuff"),
+    Corn(6, 9.5, "Stuff"),
+    Cucumber(6, 8.5, "Stuff"),
+    Lettuce(4, 11, "Stuff"),
+    Mushrooms(0, 0, "Stuff"),
+    Peas(5, 6, "Stuff"),
+    Sweet_Peppers(7, 11, "Stuff"),
+    Potatoes(6, 12, "Stuff"),
+    Pumpkins(8, 12, "Stuff"),
+    Radishes(5, 11, "Stuff"),
+    Rhubarb(3.5, 6, "Stuff"),
+    Sweet_Poatoes(8.5, 12, "Stuff"),
+    Tomatoes(5.5, 10, "Stuff"),
+    Apples(7, 11, "Stuff"),
+    Blackberries(5, 7, "Stuff"),
+    Blueberries(5, 7.5, "Stuff"),
+    Peaches(6, 9, "Stuff"),
+    Pears(7, 9, "Stuff"),
+    Raspberries(5, 10, "Stuff"),
+    Strawberries(3.5, 6, "Stuff");
     //month 0 is jan
     private final double START;
     private final double END;
     private final String[] DESCRIPTION;
     public int forceSeason = 0;//0 is use actual data, 1 is force false, 2 is force true
 
-    private Crops(final double startMonth, final double endMonth, final String[] data) {
+    private Crops(final double startMonth, final double endMonth, final String... data) {
         START = startMonth;
         END = endMonth;
         DESCRIPTION = data;

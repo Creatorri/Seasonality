@@ -12,16 +12,17 @@ public class MouseInput implements MouseListener {
 
     public int mx;
     public int my;
+    public boolean clicked;
 
     @Override
     public void mouseClicked(MouseEvent e) {
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
         mx = e.getX();
         my = e.getY();
+        clicked = true;
         for (ActionArea aa : Seasonality.aa) {
+            if(!clicked){
+                return;
+            }
             if (!aa.parent.isVisible()) {
                 continue;
             }
@@ -30,6 +31,9 @@ public class MouseInput implements MouseListener {
             }
         }
         for (MButton button : Seasonality.buttons) {
+            if(!clicked){
+                return;
+            }
             if (!button.visible || !button.parent.isVisible()) {
                 continue;
             }
@@ -41,13 +45,22 @@ public class MouseInput implements MouseListener {
     }
 
     @Override
+    public void mousePressed(MouseEvent e) {
+    }
+
+    @Override
     public void mouseReleased(MouseEvent e) {
+        clicked = false;
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
         if (Seasonality.s != null) {
-            Seasonality.s.render();
+            try {
+                Seasonality.s.render();
+            } catch (Exception ex) {
+                System.err.println(ex.getMessage());
+            }
         }
     }
 
