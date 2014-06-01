@@ -52,7 +52,10 @@ public class Seasonality extends JFrame {
     public static boolean update = false, resetPaint = false;
     //Score
     public static int score = 0;
-
+    //Mode
+    public static final int EASY_MODE = 0;
+    public static final int NORMAL_MODE = 1;
+    public static int mode = 0;
     /**
      * @param args the command line arguments
      */
@@ -141,7 +144,7 @@ public class Seasonality extends JFrame {
             }
 
             g.setColor(Color.BLACK);
-            if (update) {
+            if (update && mode != NORMAL) {
                 g.drawImage(new assets.LoadArt().createBufferedImage("InfoPanel.png", (int) (0.55 * getWidth()), (int) (0.5 * getHeight())), (int) (0.225 * getWidth()), (int) (0.25 * getHeight()), this);
                 for(int i=0;i<clicked.length;i++){
                     if(clicked[i]){
@@ -156,8 +159,8 @@ public class Seasonality extends JFrame {
 
         for (int i = 0; i < aa.size(); i++) {
             aa.get(i).setPos((int) (aaX.get(i) * s.getWidth()), (int) (aaY.get(i) * s.getHeight()), (int) (aasX.get(i) * s.getWidth()), (int) (aasY.get(i) * s.getHeight()));
-            if (pointTaken[i]) {
-                g.drawImage(aa.get(i).img, aa.get(i).x, aa.get(i).y, this);
+            if (pointTaken[Crops.valueOf(aa.get(i).name).ordinal()]) {
+                g.drawImage(new LoadArt().createBufferedImage("ActionArea.png", aa.get(i).sx, aa.get(i).sy), aa.get(i).x, aa.get(i).y, this);
             }
         }
 

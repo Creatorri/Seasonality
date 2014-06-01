@@ -21,11 +21,23 @@ public class MButtonInput {
         System.out.println("MBUTTON:" + command);
         lastCommand = command;
         if (parent == Seasonality.mmp) {
-            if (command.equalsIgnoreCase("Start Game")) {
+            if (command.equalsIgnoreCase("Play Normal Mode")) {
+                Seasonality.mode = Seasonality.NORMAL_MODE;
                 Seasonality.mi.clicked=false;
                 Seasonality.mmp.setVisible(false);
                 Seasonality.gp.setVisible(true);
                 Seasonality.gp.startGame(1);
+                Seasonality.resetPaint = true;
+                Seasonality.score = 0;
+                Seasonality.s.render();
+                return;
+            }
+            if (command.equalsIgnoreCase("Play Easy Mode")) {
+                Seasonality.mode = Seasonality.EASY_MODE;
+                Seasonality.mi.clicked=false;
+                Seasonality.mmp.setVisible(false);
+                Seasonality.gp.setVisible(true);
+                Seasonality.gp.startGame(3);
                 Seasonality.resetPaint = true;
                 Seasonality.score = 0;
                 Seasonality.s.render();
@@ -53,7 +65,7 @@ public class MButtonInput {
                     if (Seasonality.clicked[i]) {
                         Seasonality.clicked[i] = false;
                         Seasonality.pointTaken[i] = true;
-                        if (Crops.values()[i].inSeason((double) Calendar.getInstance().get(Calendar.MONTH)-1)) {
+                        if (Crops.values()[i].inSeason((double) Calendar.getInstance().get(Calendar.MONTH))) {
                             Seasonality.score++;
                         } else {
                             Seasonality.score--;

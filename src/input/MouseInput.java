@@ -2,13 +2,14 @@ package input;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import seasonality.Seasonality;
 
 /**
  *
  * @author Torri
  */
-public class MouseInput implements MouseListener {
+public class MouseInput implements MouseListener,MouseMotionListener {
 
     public int mx;
     public int my;
@@ -66,5 +67,15 @@ public class MouseInput implements MouseListener {
 
     @Override
     public void mouseExited(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+        mx = e.getX();
+        my = e.getY();
     }
 }

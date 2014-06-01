@@ -7,7 +7,7 @@ package seasonality;
 public enum Crops {
 
     Asparagus(3.5, 5.5, "Stuff"),
-    Beans(6, 9, "Beans are beans because beans.", "in season from July to October"),
+    Beans(6, 9, "Beans are beans because beans.", "In season from July to October"),
     Beets(5, 11, "Stuff"),
     Spring_Broccoli(5.5, 6.5, "Stuff"),
     Fall_Broccoli(8, 11, "Stuff"),
