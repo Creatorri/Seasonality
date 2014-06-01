@@ -1,7 +1,5 @@
 package seasonality;
 
-import java.time.Month;
-
 /**
  *
  * @author Torri
@@ -69,12 +67,6 @@ public enum Crops {
     public double getEndMonth() {
         return END;
     }
-
-    public boolean inSeason(Month m) {
-        int mon = m.getValue() - 1;
-        return forceSeason == 0 ? (mon >= START && mon < END) : (forceSeason != 1);
-    }
-
     /**
      * Month 0 is Jan, Month 11 is Dec
      *

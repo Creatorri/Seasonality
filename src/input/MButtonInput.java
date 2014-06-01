@@ -53,7 +53,7 @@ public class MButtonInput {
                     if (Seasonality.clicked[i]) {
                         Seasonality.clicked[i] = false;
                         Seasonality.pointTaken[i] = true;
-                        if (Crops.values()[i].inSeason(Calendar.getInstance().get(Calendar.MONTH))) {
+                        if (Crops.values()[i].inSeason((double) Calendar.getInstance().get(Calendar.MONTH)-1)) {
                             Seasonality.score++;
                         } else {
                             Seasonality.score--;
