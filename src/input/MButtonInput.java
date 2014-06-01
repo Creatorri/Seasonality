@@ -83,6 +83,7 @@ public class MButtonInput {
                 if (command.equalsIgnoreCase(Crops.values()[i].toString())) {
                     Seasonality.clicked[i] = true;
                     Seasonality.update = true;
+                    if(Seasonality.mode == Seasonality.NORMAL_MODE) break;
                     for (MButton m : Seasonality.buttons) {
                         if (m.name.equalsIgnoreCase("Pick Up") | m.name.equalsIgnoreCase("Put Back")) {
                             m.setVisible(true);

@@ -144,7 +144,7 @@ public class Seasonality extends JFrame {
             }
 
             g.setColor(Color.BLACK);
-            if (update && mode != NORMAL) {
+            if (update && mode != NORMAL_MODE) {
                 g.drawImage(new assets.LoadArt().createBufferedImage("InfoPanel.png", (int) (0.55 * getWidth()), (int) (0.5 * getHeight())), (int) (0.225 * getWidth()), (int) (0.25 * getHeight()), this);
                 for(int i=0;i<clicked.length;i++){
                     if(clicked[i]){
