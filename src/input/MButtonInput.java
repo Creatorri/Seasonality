@@ -23,7 +23,6 @@ public class MButtonInput {
         if (parent == Seasonality.mmp) {
             if (command.equalsIgnoreCase("Play Normal Mode")) {
                 Seasonality.mode = Seasonality.NORMAL_MODE;
-                Seasonality.mi.clicked=false;
                 Seasonality.mmp.setVisible(false);
                 Seasonality.gp.setVisible(true);
                 Seasonality.gp.startGame(1);
@@ -34,7 +33,6 @@ public class MButtonInput {
             }
             if (command.equalsIgnoreCase("Play Easy Mode")) {
                 Seasonality.mode = Seasonality.EASY_MODE;
-                Seasonality.mi.clicked=false;
                 Seasonality.mmp.setVisible(false);
                 Seasonality.gp.setVisible(true);
                 Seasonality.gp.startGame(3);
@@ -51,20 +49,21 @@ public class MButtonInput {
         }
         if (parent == Seasonality.gp) {
             if (command.equalsIgnoreCase("Back To Menu")) {
-                Seasonality.mi.clicked=false;
                 Seasonality.gp.stopGame();
                 Seasonality.s.render();
                 return;
             }
             if (command.equalsIgnoreCase("put back")) {
+                Seasonality.pickedup = 0;
                 Seasonality.resetPaint = true;
                 return;
             }
             if (command.equalsIgnoreCase("Pick up")) {
                 for (int i = 0; i < Seasonality.clicked.length; i++) {
                     if (Seasonality.clicked[i]) {
-                        Seasonality.clicked[i] = false;
-                        Seasonality.pointTaken[i] = true;
+//                        Seasonality.clicked[i] = false;
+//                        Seasonality.pointTaken[i] = true;
+                        Seasonality.pickedup = i;
                         if (Crops.values()[i].inSeason((double) Calendar.getInstance().get(Calendar.MONTH))) {
                             Seasonality.score++;
                         } else {
@@ -81,9 +80,11 @@ public class MButtonInput {
                     continue;
                 }
                 if (command.equalsIgnoreCase(Crops.values()[i].toString())) {
-                    Seasonality.clicked[i] = true;
+                    Seasonality.pickedup = i;
                     Seasonality.update = true;
-                    if(Seasonality.mode == Seasonality.NORMAL_MODE) break;
+                    if (Seasonality.mode == Seasonality.NORMAL_MODE) {
+                        break;
+                    }
                     for (MButton m : Seasonality.buttons) {
                         if (m.name.equalsIgnoreCase("Pick Up") | m.name.equalsIgnoreCase("Put Back")) {
                             m.setVisible(true);
@@ -94,5 +95,6 @@ public class MButtonInput {
             }
             return;
         }
+        System.err.println("And this method was called why?\n Non fatal error in MButtonInput.class: No corresponding action to button press \""+command+"\"");
     }
 }

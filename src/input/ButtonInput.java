@@ -13,7 +13,7 @@ public class ButtonInput implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
-        System.out.println("JBUTTON:" + command);
+//        System.out.println("JBUTTON:" + command);
         if (command.equalsIgnoreCase("Done/Continue To Game")) {
             Seasonality.o.setVisible(false);
             Seasonality.mmp.setVisible(true);

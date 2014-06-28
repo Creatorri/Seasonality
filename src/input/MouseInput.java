@@ -9,21 +9,19 @@ import seasonality.Seasonality;
  *
  * @author Torri
  */
-public class MouseInput implements MouseListener,MouseMotionListener {
+public class MouseInput implements MouseListener, MouseMotionListener {
 
     public int mx;
     public int my;
-    public boolean clicked;
+    
+    public int dmx;
+    public int dmy;
 
     @Override
     public void mouseClicked(MouseEvent e) {
         mx = e.getX();
         my = e.getY();
-        clicked = true;
         for (ActionArea aa : Seasonality.aa) {
-            if(!clicked){
-                return;
-            }
             if (!aa.parent.isVisible()) {
                 continue;
             }
@@ -32,9 +30,6 @@ public class MouseInput implements MouseListener,MouseMotionListener {
             }
         }
         for (MButton button : Seasonality.buttons) {
-            if(!clicked){
-                return;
-            }
             if (!button.visible || !button.parent.isVisible()) {
                 continue;
             }
@@ -42,7 +37,6 @@ public class MouseInput implements MouseListener,MouseMotionListener {
                 return;
             }
         }
-//        System.out.println(((double) mx / (double) Seasonality.s.getWidth()) + "," + ((double) my / (double) Seasonality.s.getHeight()));
     }
 
     @Override
@@ -51,7 +45,6 @@ public class MouseInput implements MouseListener,MouseMotionListener {
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        clicked = false;
     }
 
     @Override
@@ -67,6 +60,8 @@ public class MouseInput implements MouseListener,MouseMotionListener {
 
     @Override
     public void mouseExited(MouseEvent e) {
+        dmx = -1;
+        dmy = -1;
     }
 
     @Override
@@ -75,7 +70,7 @@ public class MouseInput implements MouseListener,MouseMotionListener {
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        mx = e.getX();
-        my = e.getY();
+        dmx = e.getX();
+        dmy = e.getY();
     }
 }

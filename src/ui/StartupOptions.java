@@ -1,5 +1,7 @@
 package ui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import seasonality.Seasonality;
 
@@ -17,6 +19,7 @@ public class StartupOptions extends javax.swing.JPanel {
     public StartupOptions() {
         initComponents();
         done.addActionListener(Seasonality.bi);
+
     }
 
     /**
@@ -36,6 +39,11 @@ public class StartupOptions extends javax.swing.JPanel {
         lastSetting = new javax.swing.JButton();
 
         crop.setModel(new javax.swing.DefaultComboBoxModel(seasonality.Crops.values()));
+        crop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cropActionPerformed(evt);
+            }
+        });
 
         inseason.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "In Season", "Out Of Season" }));
 
@@ -83,6 +91,10 @@ public class StartupOptions extends javax.swing.JPanel {
                 .addGap(327, 327, 327))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cropActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cropActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox crop;

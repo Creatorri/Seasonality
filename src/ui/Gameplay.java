@@ -40,7 +40,7 @@ public class Gameplay extends JPanel implements Runnable {
         Seasonality.buttons.get(Seasonality.buttons.size() - 1).setVisible(false);
         Seasonality.buttons.get(Seasonality.buttons.size() - 1).addListener(Seasonality.mbi);
 
-        Seasonality.aa.add(new ActionArea(1, 1, 1, 1, Crops.Beans.toString(), this));
+        Seasonality.aa.add(new ActionArea(1, 1, 1, 1, Crops.Green_Beans.toString(), this));
         Seasonality.aaX.add(.37604166666666666);
         Seasonality.aaY.add(.43148148148148147);
         Seasonality.aasX.add(.5458333333333333 - .37604166666666666);
@@ -50,7 +50,7 @@ public class Gameplay extends JPanel implements Runnable {
 
     public synchronized void startGame(double mins) {
         stopGame();
-        run=true;
+        run = true;
         Seasonality.mmp.setVisible(false);
         Seasonality.timeLeft = (long) (mins * 60);
         countDown = new Thread(this, "Countdown");
@@ -59,7 +59,7 @@ public class Gameplay extends JPanel implements Runnable {
 
     public synchronized void stopGame() {
         Seasonality.timeLeft = 0;
-        run=false;
+        run = false;
         for (int i = 0; i < Seasonality.pointTaken.length; i++) {
             Seasonality.pointTaken[i] = false;
             Seasonality.clicked[i] = false;
@@ -76,17 +76,17 @@ public class Gameplay extends JPanel implements Runnable {
             }
             s = System.currentTimeMillis() / 1000;
             Seasonality.timeLeft--;
-            try{
+            try {
                 Seasonality.s.render();
-            }catch(Exception e){
+            } catch (Exception e) {
                 System.err.println(e.getMessage());
             }
         }
         Seasonality.gp.setVisible(false);
         Seasonality.mmp.setVisible(true);
-        try{
+        try {
             Seasonality.s.render();
-        }catch(Exception e){
+        } catch (Exception e) {
             System.err.println(e.getMessage());
         }
     }

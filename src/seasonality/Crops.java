@@ -1,5 +1,8 @@
 package seasonality;
 
+import assets.LoadArt;
+import java.awt.image.BufferedImage;
+
 /**
  *
  * @author Torri
@@ -7,7 +10,7 @@ package seasonality;
 public enum Crops {
 
     Asparagus(3.5, 5.5, "Stuff"),
-    Beans(6, 9, "Beans are beans because beans.", "In season from July to October"),
+    Green_Beans(6, 9, "Beans are beans because beans.", "In season from July to October"),
     Beets(5, 11, "Stuff"),
     Spring_Broccoli(5.5, 6.5, "Stuff"),
     Fall_Broccoli(8, 11, "Stuff"),
@@ -36,6 +39,8 @@ public enum Crops {
     private final double END;
     private final String[] DESCRIPTION;
     public int forceSeason = 0;//0 is use actual data, 1 is force false, 2 is force true
+    public final BufferedImage image;
+    private final LoadArt la = new LoadArt();
 
     private Crops(final double startMonth, final double endMonth, final String... data) {
         START = startMonth;
@@ -43,6 +48,11 @@ public enum Crops {
         DESCRIPTION = data;
         if (START == END) {
             forceSeason = 2;
+        }
+        if(la.createBufferedImage(this.toString()) == null){
+            image = la.createBufferedImage("default.png");
+        }else{
+            image = la.createBufferedImage(this.toString());
         }
     }
 
@@ -67,6 +77,7 @@ public enum Crops {
     public double getEndMonth() {
         return END;
     }
+
     /**
      * Month 0 is Jan, Month 11 is Dec
      *
@@ -87,18 +98,30 @@ public enum Crops {
     }
 
     /**
-     * Gets String format of value
+     * Gets String format of type
      *
      * @return
      */
     public String toString() {
         String[] s = super.toString().split("_");
-        if (s.length == 1) {
+        if (s.length <= 1) {
             return super.toString();
         }
         String out = "";
-        for (String item : s) {
-            out += item + " ";
+        for (int i=0;i<s.length;i++) {
+            out += i == s.length-1 ? s[i] : s[i] + " ";
+        }
+        return out;
+    }
+    
+    public static String stringToInternalName(String value){
+        String[] s = value.split(" ");
+        if (s.length <= 1) {
+            return value;
+        }
+        String out = "";
+        for (int i=0;i<s.length;i++) {
+            out += i == s.length-1 ? s[i] : s[i] + "_";
         }
         return out;
     }
