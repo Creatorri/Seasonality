@@ -25,7 +25,7 @@ public enum Crops {
     Pumpkins(8, 12, "Stuff"),
     Radishes(5, 11, "Stuff"),
     Rhubarb(3.5, 6, "Stuff"),
-    Sweet_Poatoes(8.5, 12, "Stuff"),
+    Sweet_Potatoes(8.5, 12, "Stuff"),
     Tomatoes(5.5, 10, "Stuff"),
     Apples(7, 11, "Stuff"),
     Blackberries(5, 7, "Stuff"),
@@ -49,10 +49,10 @@ public enum Crops {
         if (START == END) {
             forceSeason = 2;
         }
-        if(la.createBufferedImage(this.toString()) == null){
+        if(la.createBufferedImage(this.toString().toLowerCase()+".png") == null){
             image = la.createBufferedImage("default.png");
         }else{
-            image = la.createBufferedImage(this.toString());
+            image = la.createBufferedImage(this.toString().toLowerCase()+".png");
         }
     }
 
