@@ -35,4 +35,5 @@ public class MainMenuPanel extends JPanel {
         Seasonality.buttons.get(Seasonality.buttons.size() - 1).setVisible(true);
         Seasonality.buttons.get(Seasonality.buttons.size() - 1).addListener(Seasonality.mbi);
     }
+
 }

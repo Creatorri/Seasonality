@@ -47,12 +47,12 @@ public class Gameplay extends JPanel implements Runnable {
         Seasonality.aasY.add((124.0 - 20.0) / 1080.0);
         Seasonality.aa.get(Seasonality.aa.size() - 1).addListener(Seasonality.mbi);
 
-//        Seasonality.aa.add(new ActionArea(1, 1, 1, 1, Crops.Asparagus.toString(), this));
-//        Seasonality.aaX.add(230.0/1920.0);
-//        Seasonality.aaY.add(20.0/1080.0);
-//        Seasonality.aasX.add((430.0-230.0)/1920.0);
-//        Seasonality.aasY.add((124.0-20.0)/1080.0);
-//        Seasonality.aa.get(Seasonality.aa.size() - 1).addListener(Seasonality.mbi);
+        Seasonality.aa.add(new ActionArea(1, 1, 1, 1, Crops.Peaches.toString(), this));
+        Seasonality.aaX.add(490.0 / 1920.0);
+        Seasonality.aaY.add(66.0 / 1080.0);
+        Seasonality.aasX.add((710.0 - 490.0) / 1920.0);
+        Seasonality.aasY.add((148.0 - 66.0) / 1080.0);
+        Seasonality.aa.get(Seasonality.aa.size() - 1).addListener(Seasonality.mbi);
     }
 
     public synchronized void startGame(double mins) {
@@ -82,18 +82,12 @@ public class Gameplay extends JPanel implements Runnable {
                 s = System.currentTimeMillis() / 1000;
                 Seasonality.timeLeft--;
             }
-            try {
-                Seasonality.s.render();
-            } catch (Exception e) {
-                System.err.println(e.getMessage());
-            }
+            Seasonality.s.render();
         }
         Seasonality.gp.setVisible(false);
         Seasonality.mmp.setVisible(true);
-        try {
-            Seasonality.s.render();
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-        }
+        Seasonality.pickedup = -1;
+        Seasonality.s.render();
     }
+
 }

@@ -124,4 +124,5 @@ public class MButton {
     public void setData(String s) {
         data = s;
     }
+
 }

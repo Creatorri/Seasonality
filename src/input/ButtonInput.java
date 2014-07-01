@@ -22,4 +22,5 @@ public class ButtonInput implements ActionListener {
             Seasonality.s.repaint();
         }
     }
+
 }

@@ -92,9 +92,10 @@ public class Seasonality extends JFrame {
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         ge.getDefaultScreenDevice().setFullScreenWindow(s);
     }
+
     public BufferedImage img;
 
-    public void render() throws Exception {
+    public void render() {
 
         if (o.isVisible()) {
             return;
@@ -156,14 +157,6 @@ public class Seasonality extends JFrame {
                     }
                 }
             }
-            if (update && mode == NORMAL_MODE) {
-                for (int i = 0; i < clicked.length; i++) {
-                    if (clicked[i]) {
-                        pickedup = i;
-                        g.drawImage(Crops.values()[pickedup].image, mi.dmx, mi.dmy, this);
-                    }
-                }
-            }
         }
 
         for (int i = 0; i < aa.size(); i++) {
@@ -198,8 +191,9 @@ public class Seasonality extends JFrame {
             render();
         } catch (Exception ex) {
 //            System.err.println(ex.getMessage());
-            ex.printStackTrace();
+            ex.printStackTrace(System.err);
         }
         g.dispose();
     }
+
 }

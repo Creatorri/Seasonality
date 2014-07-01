@@ -17,4 +17,5 @@ public class ActionArea extends MButton {
         super.setPos(x1, y1, sx1, sy1);
         img = la.createBufferedImage("ActionArea.png", sx, sy);
     }
+
 }

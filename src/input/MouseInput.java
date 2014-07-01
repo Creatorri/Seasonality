@@ -25,7 +25,7 @@ public class MouseInput implements MouseListener, MouseMotionListener {
     public void mousePressed(MouseEvent e) {
         mx = e.getX();
         my = e.getY();
-//        System.out.println(mx + "/" + Seasonality.s.getWidth() + " , " + my + "/" + Seasonality.s.getHeight());
+        System.out.println(mx + "/" + Seasonality.s.getWidth() + " , " + my + "/" + Seasonality.s.getHeight());
         for (ActionArea aa : Seasonality.aa) {
             if (!aa.parent.isVisible()) {
                 continue;
@@ -51,18 +51,14 @@ public class MouseInput implements MouseListener, MouseMotionListener {
     @Override
     public void mouseEntered(MouseEvent e) {
         if (Seasonality.s != null) {
-            try {
-                Seasonality.s.render();
-            } catch (Exception ex) {
-                System.err.println(ex.getMessage());
-            }
+            Seasonality.s.render();
         }
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-//        dmx = -1;
-//        dmy = -1;
+        dmx = -1;
+        dmy = -1;
     }
 
     @Override
@@ -76,4 +72,5 @@ public class MouseInput implements MouseListener, MouseMotionListener {
         dmx = e.getX();
         dmy = e.getY();
     }
+
 }

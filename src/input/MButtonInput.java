@@ -54,7 +54,7 @@ public class MButtonInput {
                 return;
             }
             if (command.equalsIgnoreCase("put back")) {
-                Seasonality.pickedup = 0;
+                Seasonality.pickedup = -1;
                 Seasonality.resetPaint = true;
                 return;
             }
@@ -97,4 +97,5 @@ public class MButtonInput {
         }
         System.err.println("And this method (clicked(String)) was called for what reason?\n Non fatal error in MButtonInput.class: No corresponding action to button press \"" + command + "\"");
     }
+
 }

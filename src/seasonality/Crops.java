@@ -27,7 +27,7 @@ public enum Crops {
     Rhubarb(3.5, 6, "Stuff"),
     Sweet_Potatoes(8.5, 12, "Stuff"),
     Tomatoes(5.5, 10, "Stuff"),
-    Apples(7, 11, "Stuff"),
+    Apples(7, 11, "Draggy Drag the blue green dragon"),
     Blackberries(5, 7, "Stuff"),
     Blueberries(5, 7.5, "Stuff"),
     Peaches(6, 9, "Stuff"),
@@ -125,4 +125,5 @@ public enum Crops {
         }
         return out;
     }
+
 }
