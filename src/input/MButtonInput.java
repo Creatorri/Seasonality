@@ -80,13 +80,13 @@ public class MButtonInput {
                     continue;
                 }
                 if (command.equalsIgnoreCase(Crops.values()[i].toString())) {
-                    Seasonality.pickedup = i;
                     Seasonality.update = true;
                     if (Seasonality.mode == Seasonality.NORMAL_MODE) {
+                        Seasonality.pickedup = i;
                         break;
                     }
                     for (MButton m : Seasonality.buttons) {
-                        if (m.name.equalsIgnoreCase("Pick Up") | m.name.equalsIgnoreCase("Put Back")) {
+                        if (m.name.equalsIgnoreCase("Pick Up") || m.name.equalsIgnoreCase("Put Back")) {
                             m.setVisible(true);
                         }
                     }
@@ -95,6 +95,6 @@ public class MButtonInput {
             }
             return;
         }
-        System.err.println("And this method was called why?\n Non fatal error in MButtonInput.class: No corresponding action to button press \""+command+"\"");
+        System.err.println("And this method (clicked(String)) was called for what reason?\n Non fatal error in MButtonInput.class: No corresponding action to button press \"" + command + "\"");
     }
 }

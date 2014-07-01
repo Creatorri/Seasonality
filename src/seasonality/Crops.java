@@ -49,10 +49,10 @@ public enum Crops {
         if (START == END) {
             forceSeason = 2;
         }
-        if(la.createBufferedImage(this.toString().toLowerCase()+".png") == null){
+        if (la.createBufferedImage(this.toString().toLowerCase() + ".png") == null) {
             image = la.createBufferedImage("default.png");
-        }else{
-            image = la.createBufferedImage(this.toString().toLowerCase()+".png");
+        } else {
+            image = la.createBufferedImage(this.toString().toLowerCase() + ".png");
         }
     }
 
@@ -108,20 +108,20 @@ public enum Crops {
             return super.toString();
         }
         String out = "";
-        for (int i=0;i<s.length;i++) {
-            out += i == s.length-1 ? s[i] : s[i] + " ";
+        for (int i = 0; i < s.length; i++) {
+            out += i == s.length - 1 ? s[i] : s[i] + " ";
         }
         return out;
     }
-    
-    public static String stringToInternalName(String value){
+
+    public static String stringToInternalName(String value) {
         String[] s = value.split(" ");
         if (s.length <= 1) {
             return value;
         }
         String out = "";
-        for (int i=0;i<s.length;i++) {
-            out += i == s.length-1 ? s[i] : s[i] + "_";
+        for (int i = 0; i < s.length; i++) {
+            out += i == s.length - 1 ? s[i] : s[i] + "_";
         }
         return out;
     }

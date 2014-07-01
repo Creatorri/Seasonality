@@ -40,12 +40,19 @@ public class Gameplay extends JPanel implements Runnable {
         Seasonality.buttons.get(Seasonality.buttons.size() - 1).setVisible(false);
         Seasonality.buttons.get(Seasonality.buttons.size() - 1).addListener(Seasonality.mbi);
 
-        Seasonality.aa.add(new ActionArea(1, 1, 1, 1, Crops.Green_Beans.toString(), this));
-        Seasonality.aaX.add(.37604166666666666);
-        Seasonality.aaY.add(.43148148148148147);
-        Seasonality.aasX.add(.5458333333333333 - .37604166666666666);
-        Seasonality.aasY.add(.6851851851851852 - .43148148148148147);
+        Seasonality.aa.add(new ActionArea(1, 1, 1, 1, Crops.Apples.toString(), this));
+        Seasonality.aaX.add(230.0 / 1920.0);
+        Seasonality.aaY.add(20.0 / 1080.0);
+        Seasonality.aasX.add((430.0 - 230.0) / 1920.0);
+        Seasonality.aasY.add((124.0 - 20.0) / 1080.0);
         Seasonality.aa.get(Seasonality.aa.size() - 1).addListener(Seasonality.mbi);
+
+//        Seasonality.aa.add(new ActionArea(1, 1, 1, 1, Crops.Asparagus.toString(), this));
+//        Seasonality.aaX.add(230.0/1920.0);
+//        Seasonality.aaY.add(20.0/1080.0);
+//        Seasonality.aasX.add((430.0-230.0)/1920.0);
+//        Seasonality.aasY.add((124.0-20.0)/1080.0);
+//        Seasonality.aa.get(Seasonality.aa.size() - 1).addListener(Seasonality.mbi);
     }
 
     public synchronized void startGame(double mins) {
@@ -71,11 +78,10 @@ public class Gameplay extends JPanel implements Runnable {
     public void run() {
         long s = System.currentTimeMillis() / 1000;
         while (Seasonality.timeLeft > 0 && run) {
-            if (s == (System.currentTimeMillis() / 1000)) {
-                continue;
+            if (s != (System.currentTimeMillis() / 1000)) {
+                s = System.currentTimeMillis() / 1000;
+                Seasonality.timeLeft--;
             }
-            s = System.currentTimeMillis() / 1000;
-            Seasonality.timeLeft--;
             try {
                 Seasonality.s.render();
             } catch (Exception e) {
