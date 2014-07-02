@@ -17,7 +17,7 @@ public enum Crops {
     Oranges(0, 0, Season.FALSE, "STUFF"),
     Cherries(5, 6, Season.DEFAULT, "STUFF"),
     Plums(6, 8, Season.DEFAULT, "STUFF"),
-    Avacado(0, 0, Season.FALSE, "STUFF"),
+    Avacado(0, 0, Season.FALSE, "STUFF"),//Add this next
     Mushrooms(0, 0, Season.TRUE, "Stuff"),
     Cantelopes(7, 8, Season.DEFAULT, "STUFF"),
     Zucchinis(5, 9, Season.DEFAULT, "STUFF"),
@@ -36,7 +36,7 @@ public enum Crops {
     Strawberries(3.5, 6, Season.DEFAULT, "Stuff"),
     Eggplant(6, 9, Season.DEFAULT, "STUFF"),
     Corn(6, 9.5, Season.DEFAULT, "Stuff"),
-    Swiss_Chard(4, 10, Season.FALSE, "STUFF"),//Check
+    Swiss_Chard(4, 10, Season.DEFAULT, "STUFF"),
     Pineapples(0, 0, Season.FALSE, "STUFF"),
     Blueberries(5, 7.5, Season.DEFAULT, "Stuff"),
     Raspberries(5, 10, Season.DEFAULT, "Stuff");
