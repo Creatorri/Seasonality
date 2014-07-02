@@ -9,45 +9,53 @@ import java.awt.image.BufferedImage;
  */
 public enum Crops {
 
-    Asparagus(3.5, 5.5, "Stuff"),
-    Green_Beans(6, 9, "Beans are beans because beans.", "In season from July to October"),
-    Beets(5, 11, "Stuff"),
-    Spring_Broccoli(5.5, 6.5, "Stuff"),
-    Fall_Broccoli(8, 11, "Stuff"),
-    Carrots(6, 11, "Stuff"),
-    Corn(6, 9.5, "Stuff"),
-    Cucumber(6, 8.5, "Stuff"),
-    Lettuce(4, 11, "Stuff"),
-    Mushrooms(0, 0, "Stuff"),
-    Peas(5, 6, "Stuff"),
-    Sweet_Peppers(7, 11, "Stuff"),
-    Potatoes(6, 12, "Stuff"),
-    Pumpkins(8, 12, "Stuff"),
-    Radishes(5, 11, "Stuff"),
-    Rhubarb(3.5, 6, "Stuff"),
-    Sweet_Potatoes(8.5, 12, "Stuff"),
-    Tomatoes(5.5, 10, "Stuff"),
-    Apples(7, 11, "Draggy Drag the blue green dragon"),
-    Blackberries(5, 7, "Stuff"),
-    Blueberries(5, 7.5, "Stuff"),
-    Peaches(6, 9, "Stuff"),
-    Pears(7, 9, "Stuff"),
-    Raspberries(5, 10, "Stuff"),
-    Strawberries(3.5, 6, "Stuff");
+    Apples(7, 10, Season.DEFAULT, "Draggy Drag the blue green dragon"),
+    Peaches(6, 8, Season.DEFAULT, "Stuff"),
+    Grapes(7, 8, Season.DEFAULT, "Stuff"),
+    Bananas(0, 0, Season.FALSE, "STUFF"),
+    Lemons(0, 0, Season.FALSE, "STUFF"),
+    Oranges(0, 0, Season.FALSE, "STUFF"),
+    Cherries(5, 6, Season.DEFAULT, "STUFF"),
+    Plums(6, 8, Season.DEFAULT, "STUFF"),
+    Avacado(0, 0, Season.FALSE, "STUFF"),
+    Mushrooms(0, 0, Season.TRUE, "Stuff"),
+    Cantelopes(7, 8, Season.DEFAULT, "STUFF"),
+    Zucchinis(5, 9, Season.DEFAULT, "STUFF"),
+    Sweet_Peppers(7, 9, Season.DEFAULT, "Stuff"),
+    Peas(5, 6, Season.DEFAULT, "Stuff"),
+    Radishes(5, 11, Season.DEFAULT, "Stuff"),
+    Carrots(6, 11, Season.DEFAULT, "Stuff"),
+    Pumpkins(8, 12, Season.DEFAULT, "Stuff"),
+    Sweet_Potatoes(8.5, 11, Season.DEFAULT, "Stuff"),
+    Tomatoes(5.5, 10, Season.DEFAULT, "Stuff"),
+    Asparagus(3.5, 5.5, Season.DEFAULT, "Stuff"),
+    Lettuce(4, 11, Season.DEFAULT, "Stuff"),
+    Garlic(5, 7, Season.DEFAULT, "STUFF"),//Storage?
+    Watermelons(7, 8, Season.DEFAULT, "STUFF"),
+    Onions(4, 7, Season.FALSE, "STUFF"),//Storage?
+    Strawberries(3.5, 6, Season.DEFAULT, "Stuff"),
+    Eggplant(6, 9, Season.DEFAULT, "STUFF"),
+    Corn(6, 9.5, Season.DEFAULT, "Stuff"),
+    Swiss_Chard(4, 10, Season.FALSE, "STUFF"),//Check
+    Pineapples(0, 0, Season.FALSE, "STUFF"),
+    Blueberries(5, 7.5, Season.DEFAULT, "Stuff"),
+    Raspberries(5, 10, Season.DEFAULT, "Stuff");
+
     //month 0 is jan
     private final double START;
     private final double END;
     private final String[] DESCRIPTION;
-    public int forceSeason = 0;//0 is use actual data, 1 is force false, 2 is force true
+    public int forceSeason;//0 is use actual data, 1 is force false, 2 is force true
     public final BufferedImage image;
     private final LoadArt la = new LoadArt();
 
-    private Crops(final double startMonth, final double endMonth, final String... data) {
+    private Crops(final double startMonth, final double endMonth, int force, final String... data) {
         START = startMonth;
         END = endMonth;
         DESCRIPTION = data;
-        if (START == END) {
-            forceSeason = 2;
+        forceSeason = force;
+        if (START == END && force == Season.DEFAULT) {
+            forceSeason = Season.TRUE;
         }
         if (la.createBufferedImage(this.toString().toLowerCase() + ".png") == null) {
             image = la.createBufferedImage("default.png");
@@ -57,7 +65,7 @@ public enum Crops {
     }
 
     public void forceSeason(boolean inseason) {
-        forceSeason = inseason ? 2 : 1;
+        forceSeason = inseason ? Season.TRUE : Season.FALSE;
     }
 
     /**
@@ -124,6 +132,11 @@ public enum Crops {
             out += i == s.length - 1 ? s[i] : s[i] + "_";
         }
         return out;
+    }
+
+    private class Season {
+
+        public final static int DEFAULT = 0, FALSE = 1, TRUE = 2;
     }
 
 }

@@ -17,7 +17,7 @@ public class Gameplay extends JPanel implements Runnable {
 
     public Gameplay() {
         Seasonality.buttons.add(new MButton(750 / 2, 10, 100, 50, "Back To Menu", this));
-        Seasonality.placeX.add(0.9);
+        Seasonality.placeX.add(0.1);
         Seasonality.placeY.add(0.95);
         Seasonality.sizeX.add(0.2);
         Seasonality.sizeY.add(0.1);
