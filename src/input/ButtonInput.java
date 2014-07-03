@@ -17,7 +17,7 @@ public class ButtonInput implements ActionListener {
         if (command.equalsIgnoreCase("Done/Continue To Game")) {
             Seasonality.o.setVisible(false);
             Seasonality.mmp.setVisible(true);
-            Seasonality.s.setResizable(true);
+//            Seasonality.s.setResizable(true);
             Seasonality.s.fullScreen();
             Seasonality.s.repaint();
         }

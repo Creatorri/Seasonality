@@ -47,8 +47,8 @@ public class MouseInput implements MouseListener, MouseMotionListener {
     @Override
     public void mouseReleased(MouseEvent e) {
         if (Seasonality.pickedup >= 0) {
-            if (e.getX() > (1580.0 / 1920.0) * Seasonality.s.getWidth() && e.getX() < (1920.0 / 1920.0) * Seasonality.s.getWidth()) {
-                if (e.getY() > (890.0 / 1080.0) * Seasonality.s.getHeight() && e.getY() < (1080.0 / 1080.0) * Seasonality.s.getHeight()) {
+            if (e.getX() > (1580.0 / 1920.0) * Seasonality.s.getWidth() && e.getX() < Seasonality.s.getWidth()) {
+                if (e.getY() > (890.0 / 1080.0) * Seasonality.s.getHeight() && e.getY() < Seasonality.s.getHeight()) {
                     Seasonality.doScoreOp();
                 }
             }

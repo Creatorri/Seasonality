@@ -1,6 +1,7 @@
 package seasonality;
 
 import assets.LoadArt;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 
 /**
@@ -46,7 +47,7 @@ public enum Crops {
     private final double END;
     private final String[] DESCRIPTION;
     public int forceSeason;//0 is use actual data, 1 is force false, 2 is force true
-    public final BufferedImage image;
+    public BufferedImage image;
     private final LoadArt la = new LoadArt();
 
     private Crops(final double startMonth, final double endMonth, int force, final String... data) {
@@ -135,8 +136,15 @@ public enum Crops {
     }
 
     private class Season {
-
         public final static int DEFAULT = 0, FALSE = 1, TRUE = 2;
     }
 
+    public void resizeImage(int sx, int sy){
+        BufferedImage temp = image;
+        BufferedImage out = new BufferedImage(sx, sy, BufferedImage.TYPE_INT_ARGB);
+        out.createGraphics().drawImage(temp.getScaledInstance(sx, sy, Image.SCALE_SMOOTH), 0, 0, null);
+        out.createGraphics().dispose();
+        image = out;
+    }
+    
 }
