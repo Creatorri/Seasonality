@@ -25,7 +25,7 @@ public class MouseInput implements MouseListener, MouseMotionListener {
     public void mousePressed(MouseEvent e) {
         mx = e.getX();
         my = e.getY();
-        System.out.println(mx + "/" + Seasonality.s.getWidth() + " , " + my + "/" + Seasonality.s.getHeight());
+//        System.out.println(mx + "/" + Seasonality.s.getWidth() + " , " + my + "/" + Seasonality.s.getHeight());
         for (ActionArea aa : Seasonality.aa) {
             if (!aa.parent.isVisible()) {
                 continue;

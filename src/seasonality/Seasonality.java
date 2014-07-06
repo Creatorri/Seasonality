@@ -13,6 +13,7 @@ import java.awt.GraphicsEnvironment;
 import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Iterator;
 import javax.swing.JFrame;
 import ui.Gameplay;
 import ui.MainMenuPanel;
@@ -99,6 +100,8 @@ public class Seasonality extends JFrame {
     int renders = 0;
 
     public void render() {
+        
+        long start = System.nanoTime();
 
         xMult = getWidth() / 1174.0;
         yMult = getHeight() / 868.0;
@@ -120,25 +123,26 @@ public class Seasonality extends JFrame {
 
         if (mmp.isVisible()) {
             g.drawImage(new assets.LoadArt().createBufferedImage("MMB.jpg", getWidth(), getHeight()), 0, 0, this);
-            if (renders != 0 && renders < 3) {
+            if (renders < 3) {
                 for (int i = 0; i < aa.size(); i++) {
-                    Crops.valueOf(Crops.stringToInternalName(aa.get(i).name)).resizeImage((int) (aasX.get(i) * xMult), (int) (aasY.get(i) * yMult));
+                    aa.get(i).setPos((int) (aaX.get(i) * xMult), (int) (aaY.get(i) * yMult), (int) (aasX.get(i) * xMult), (int) (aasY.get(i) * yMult));
+                    aa.get(i).data.resizeImage((int) (aasX.get(i) * xMult), (int) (aasY.get(i) * yMult));
+                }
+                for (int i = 0; i < buttons.size(); i++) {
+                    buttons.get(i).setPos((int) ((placeX.get(i) * getWidth()) - (0.5 * sizeX.get(i) * getWidth())), (int) ((placeY.get(i) * getHeight()) - (0.5 * sizeY.get(i) * getHeight())), (int) (sizeX.get(i) * getWidth()), (int) (sizeY.get(i) * getHeight()));
                 }
             }
-        }
-
-        if (gp.isVisible()) {
-
-//            g.drawImage(new assets.LoadArt().createBufferedImage("test_stand.jpg", getWidth(), getHeight()), 0, 0, this);
+        }else if (gp.isVisible()) {
+            
             g.drawImage(new assets.LoadArt().createBufferedImage("stand.jpg", getWidth(), getHeight()), 0, 0, this);
+            
             g.setColor(Color.BLACK);
             g.fillRect((int) (getHeight() * (30.0 / 1080.0)), (int) (getHeight() * (15.0 / 1080.0)), (int) (getHeight() * (100.0 / 1080.0)), (int) (getHeight() * (50.0 / 1080.0)));
             g.setColor(Color.WHITE);
             g.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, (int) (getHeight() * (50.0 / 1080.0))));
             if ((timeLeft - ((timeLeft / 60) * 60)) >= 10) {
                 g.drawString((timeLeft / 60) + ":" + (timeLeft - ((timeLeft / 60) * 60)), (int) (getHeight() * (30.0 / 1080.0)), (int) (getHeight() * (60.0 / 1080.0)));
-            }
-            if ((timeLeft - ((timeLeft / 60) * 60)) < 10) {
+            }else{
                 g.drawString((timeLeft / 60) + ":0" + (timeLeft - ((timeLeft / 60) * 60)), (int) (getHeight() * (30.0 / 1080.0)), (int) (getHeight() * (60.0 / 1080.0)));
             }
 
@@ -147,48 +151,52 @@ public class Seasonality extends JFrame {
             g.setColor(Color.WHITE);
             g.drawString("Score: " + score, (int) (getHeight() * (30.0 / 1080.0)), (int) (getHeight() * (120.0 / 1080.0)));
 
-            if (resetPaint) {
-                for (MButton m : Seasonality.buttons) {
-                    if (m.name.equalsIgnoreCase("Pick Up") | m.name.equalsIgnoreCase("Put Back")) {
-                        m.setVisible(false);
-                    }
-                }
-                resetPaint = false;
-                update = false;
-            }
-
-            g.setColor(Color.BLACK);
-            if (update && mode == Seasonality.EASY_MODE) {
-                g.drawImage(new assets.LoadArt().createBufferedImage("InfoPanel.png", (int) (0.55 * getWidth()), (int) (0.5 * getHeight())), (int) (0.225 * getWidth()), (int) (0.25 * getHeight()), this);
-                for (int i = 0; i < clicked.length; i++) {
-                    if (clicked[i]) {
-                        g.drawString(Crops.values()[i].toString(), (int) (0.25 * getWidth()) + 10, (int) (0.25 * getHeight()) + (int) (getHeight() * (50.0 / 1080.0)));
-                        for (int j = 0; j < Crops.values()[i].getDescription().length; j++) {
-                            g.drawString(Crops.values()[i].getDescription()[j], (int) (0.25 * getWidth()) + 10, (int) (0.25 * getHeight()) + (int) (getHeight() * (50.0 / 1080.0)) * (j + 2));
-                        }
-                    }
-                }
-            }
-
-            for (int i = 0; i < aa.size(); i++) {
-                aa.get(i).setPos((int) (aaX.get(i) * xMult), (int) (aaY.get(i) * yMult), (int) (aasX.get(i) * xMult), (int) (aasY.get(i) * yMult));
-                if (pointTaken[Crops.valueOf(Crops.stringToInternalName(aa.get(i).name)).ordinal()]) {
-                    g.drawImage(new LoadArt().createBufferedImage("ActionArea.png", aa.get(i).sx, aa.get(i).sy), aa.get(i).x, aa.get(i).y, this);
-                }
-            }
-
-            if (pickedup > -1) {
-                g.drawImage(Crops.values()[pickedup].image, mi.dmx - Crops.values()[pickedup].image.getWidth() / 2, mi.dmy - Crops.values()[pickedup].image.getHeight() / 2, this);
-            }
+//            if (resetPaint) {
+//                for (MButton m : Seasonality.buttons) {
+//                    if (m.name.equalsIgnoreCase("Pick Up") | m.name.equalsIgnoreCase("Put Back")) {
+//                        m.setVisible(false);
+//                    }
+//                }
+//                resetPaint = false;
+//                update = false;
+//            }
+//
+//            if (update && mode == Seasonality.EASY_MODE) {
+//                g.setColor(Color.BLACK);
+//                g.drawImage(new assets.LoadArt().createBufferedImage("InfoPanel.png", (int) (0.55 * getWidth()), (int) (0.5 * getHeight())), (int) (0.225 * getWidth()), (int) (0.25 * getHeight()), this);
+//                for (int i = 0; i < clicked.length; i++) {
+//                    if (clicked[i]) {
+//                        g.drawString(Crops.values()[i].toString(), (int) (0.25 * getWidth()) + 10, (int) (0.25 * getHeight()) + (int) (getHeight() * (50.0 / 1080.0)));
+//                        for (int j = 0; j < Crops.values()[i].getDescription().length; j++) {
+//                            g.drawString(Crops.values()[i].getDescription()[j], (int) (0.25 * getWidth()) + 10, (int) (0.25 * getHeight()) + (int) (getHeight() * (50.0 / 1080.0)) * (j + 2));
+//                        }
+//                    }
+//                }
+//            }
 
         }
 
-        for (int i = 0; i < buttons.size(); i++) {
-            if (buttons.get(i) == null | !buttons.get(i).parent.isVisible() || !buttons.get(i).visible) {
-                continue;
+        int l = aa.size() > buttons.size() ? aa.size() : buttons.size();
+        
+        for (int i=0;i<l;i++) {
+            if(i<buttons.size()){
+                if (buttons.get(i) == null) {
+                    continue;
+                }
+                if(!buttons.get(i).parent.isVisible() || !buttons.get(i).visible){
+                    continue;
+                }
+                g.drawImage(buttons.get(i).img, buttons.get(i).x, buttons.get(i).y, this);
             }
-            buttons.get(i).setPos((int) ((placeX.get(i) * getWidth()) - (0.5 * sizeX.get(i) * getWidth())), (int) ((placeY.get(i) * getHeight()) - (0.5 * sizeY.get(i) * getHeight())), (int) (sizeX.get(i) * getWidth()), (int) (sizeY.get(i) * getHeight()));
-            g.drawImage(buttons.get(i).img, buttons.get(i).x, buttons.get(i).y, this);
+            if(i<aa.size() && gp.isVisible()){
+                if (pointTaken[aa.get(i).data.ordinal()]) {
+                    g.drawImage(aa.get(i).img, aa.get(i).x, aa.get(i).y, this);
+                }
+            }
+        }
+        
+        if(gp.isVisible() && pickedup > -1){
+            g.drawImage(Crops.values()[pickedup].image, mi.dmx - Crops.values()[pickedup].image.getWidth() / 2, mi.dmy - Crops.values()[pickedup].image.getHeight() / 2, this);
         }
 
         g.dispose();
@@ -197,6 +205,8 @@ public class Seasonality extends JFrame {
         if (timeLeft == 5 * (60000) && renders < 5) {
             renders++;
         }
+        
+        System.out.println("That update took "+(System.nanoTime()-start)/(1.0E9)+" seconds.");
     }
 
     public void paint(Graphics g) {

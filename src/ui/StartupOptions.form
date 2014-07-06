@@ -27,13 +27,8 @@
                   </Group>
               </Group>
               <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="monthDefault" pref="168" max="32767" attributes="0"/>
-                  <Component id="done" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="lastSetting" min="-2" pref="193" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <Component id="done" min="-2" pref="193" max="-2" attributes="0"/>
+              <EmptySpace pref="184" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -42,17 +37,17 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="113" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="lastSetting" max="32767" attributes="0"/>
-                  <Component id="monthDefault" pref="80" max="32767" attributes="0"/>
-                  <Component id="crop" max="32767" attributes="0"/>
-                  <Component id="inseason" alignment="1" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="useThis" pref="62" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="crop" pref="80" max="32767" attributes="0"/>
+                          <Component id="inseason" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="useThis" min="-2" pref="65" max="-2" attributes="0"/>
+                  </Group>
                   <Component id="done" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="327" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="324" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -78,24 +73,17 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="monthDefault">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Use This Month&apos;s Default"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JButton" name="useThis">
       <Properties>
         <Property name="text" type="java.lang.String" value="Use this Property"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="useThisActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="done">
       <Properties>
         <Property name="text" type="java.lang.String" value="Done/Continue To Game"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="lastSetting">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Use Last Settings"/>
       </Properties>
     </Component>
   </SubComponents>

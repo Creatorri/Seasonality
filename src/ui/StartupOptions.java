@@ -1,6 +1,8 @@
 package ui;
 
 import java.awt.image.BufferedImage;
+import java.util.Calendar;
+import seasonality.Crops;
 import seasonality.Seasonality;
 
 /**
@@ -31,10 +33,8 @@ public class StartupOptions extends javax.swing.JPanel {
 
         crop = new javax.swing.JComboBox();
         inseason = new javax.swing.JComboBox();
-        monthDefault = new javax.swing.JButton();
         useThis = new javax.swing.JButton();
         done = new javax.swing.JButton();
-        lastSetting = new javax.swing.JButton();
 
         crop.setModel(new javax.swing.DefaultComboBoxModel(seasonality.Crops.values()));
         crop.addActionListener(new java.awt.event.ActionListener() {
@@ -45,13 +45,14 @@ public class StartupOptions extends javax.swing.JPanel {
 
         inseason.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "In Season", "Out Of Season" }));
 
-        monthDefault.setText("Use This Month's Default");
-
         useThis.setText("Use this Property");
+        useThis.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                useThisActionPerformed(evt);
+            }
+        });
 
         done.setText("Done/Continue To Game");
-
-        lastSetting.setText("Use Last Settings");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -66,40 +67,46 @@ public class StartupOptions extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(inseason, 0, 134, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(monthDefault, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
-                    .addComponent(done, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lastSetting, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(done, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(184, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(113, 113, 113)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lastSetting, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(monthDefault, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
-                    .addComponent(crop)
-                    .addComponent(inseason, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(useThis, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(crop, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
+                            .addComponent(inseason))
+                        .addGap(18, 18, 18)
+                        .addComponent(useThis, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(done, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(327, 327, 327))
+                .addGap(324, 324, 324))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void cropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cropActionPerformed
-        // TODO add your handling code here:
+        boolean season = Crops.values()[crop.getSelectedIndex()].inSeason((double) Calendar.getInstance().get(Calendar.MONTH));
+        if(season){
+            inseason.setSelectedIndex(0);
+        }else{
+            inseason.setSelectedIndex(1);
+        }
     }//GEN-LAST:event_cropActionPerformed
+
+    private void useThisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_useThisActionPerformed
+        if(inseason.getSelectedIndex() == 1){
+            Crops.values()[crop.getSelectedIndex()].forceSeason(true);
+        }else{
+            Crops.values()[crop.getSelectedIndex()].forceSeason(false);
+        }
+    }//GEN-LAST:event_useThisActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox crop;
     private javax.swing.JButton done;
     private javax.swing.JComboBox inseason;
-    private javax.swing.JButton lastSetting;
-    private javax.swing.JButton monthDefault;
     private javax.swing.JButton useThis;
     // End of variables declaration//GEN-END:variables
 
