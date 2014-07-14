@@ -2,9 +2,16 @@ package ui;
 
 import input.ActionArea;
 import input.MButton;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
 import javax.swing.JPanel;
 import seasonality.Crops;
 import seasonality.Seasonality;
+import static seasonality.Seasonality.mi;
+import static seasonality.Seasonality.pickedup;
+import static seasonality.Seasonality.score;
+import static seasonality.Seasonality.timeLeft;
 
 /**
  *
@@ -268,6 +275,9 @@ public class Gameplay extends JPanel implements Runnable {
     }
 
     public synchronized void stopGame() {
+        Seasonality.es.setVisible(false);
+        Seasonality.mmp.setVisible(true);
+        Seasonality.s.render();
         Seasonality.timeLeft = 0;
         run = false;
         for (int i = 0; i < Seasonality.pointTaken.length; i++) {
@@ -287,10 +297,35 @@ public class Gameplay extends JPanel implements Runnable {
             }
             Seasonality.s.render();
         }
+        System.out.println("Game Ended");
         Seasonality.gp.setVisible(false);
-        Seasonality.mmp.setVisible(true);
+        Seasonality.es.setVisible(true);
         Seasonality.pickedup = -1;
         Seasonality.s.render();
     }
 
+    public void render(Graphics g){
+        
+        g.drawImage(new assets.LoadArt().createBufferedImage("stand.jpg", Seasonality.s.getWidth(), Seasonality.s.getHeight()), 0, 0, this);
+
+        g.setColor(Color.BLACK);
+        g.fillRect((int) (Seasonality.s.getHeight() * (30.0 / 1080.0)), (int) (Seasonality.s.getHeight() * (15.0 / 1080.0)), (int) (Seasonality.s.getHeight() * (100.0 / 1080.0)), (int) (Seasonality.s.getHeight() * (50.0 / 1080.0)));
+        g.setColor(Color.WHITE);
+        g.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, (int) (Seasonality.s.getHeight() * (50.0 / 1080.0))));
+        if ((timeLeft - ((timeLeft / 60) * 60)) >= 10) {
+            g.drawString((timeLeft / 60) + ":" + (timeLeft - ((timeLeft / 60) * 60)), (int) (Seasonality.s.getHeight() * (30.0 / 1080.0)), (int) (Seasonality.s.getHeight() * (60.0 / 1080.0)));
+        } else {
+            g.drawString((timeLeft / 60) + ":0" + (timeLeft - ((timeLeft / 60) * 60)), (int) (Seasonality.s.getHeight() * (30.0 / 1080.0)), (int) (Seasonality.s.getHeight() * (60.0 / 1080.0)));
+        }
+
+        g.setColor(Color.BLACK);
+        g.fillRect((int) (Seasonality.s.getHeight() * (30.0 / 1080.0)), (int) (Seasonality.s.getHeight() * (75.0 / 1080.0)), g.getFontMetrics().stringWidth("Score: " + score), (int) (Seasonality.s.getHeight() * (52.0 / 1080.0)));
+        g.setColor(Color.WHITE);
+        g.drawString("Score: " + score, (int) (Seasonality.s.getHeight() * (30.0 / 1080.0)), (int) (Seasonality.s.getHeight() * (120.0 / 1080.0)));
+
+        if (this.isVisible() && pickedup > -1) {
+            g.drawImage(Crops.values()[pickedup].image, mi.dmx - Crops.values()[pickedup].image.getWidth() / 2, mi.dmy - Crops.values()[pickedup].image.getHeight() / 2, this);
+        }
+        
+    }
 }
