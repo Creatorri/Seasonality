@@ -28,10 +28,10 @@ public class Seasonality extends JFrame {
     public static StartupOptions o;
     public static MainMenuPanel mmp;
     public static Gameplay gp;
+    public static EndScreen es;
     public static ButtonInput bi = new ButtonInput();
     public static MouseInput mi = new MouseInput();
     public static MButtonInput mbi = new MButtonInput();
-    public static EndScreen es = new EndScreen();
     //MButtons
     public static ArrayList<MButton> buttons = new ArrayList<>();
     public static ArrayList<Double> placeX = new ArrayList<>();
@@ -79,6 +79,7 @@ public class Seasonality extends JFrame {
         addMouseListener(mi);
         addMouseMotionListener(mi);
         setVisible(true);
+        //Inits and Adds
         o = new StartupOptions();
         o.setVisible(true);
         add(o);
@@ -90,6 +91,8 @@ public class Seasonality extends JFrame {
         gp = new Gameplay();
         gp.setVisible(false);
         add(gp);
+        es = new EndScreen();
+        //Allows User To Continue
         o.done.setEnabled(true);
     }
 
@@ -122,6 +125,7 @@ public class Seasonality extends JFrame {
 
         if (mmp.isVisible()) {
             mmp.render(g);
+            es.setVisible(false);
         } else if (gp.isVisible()) {
             gp.render(g);
         } else if (es.isVisible()) {
@@ -175,7 +179,11 @@ public class Seasonality extends JFrame {
     }
 
     public static void doScoreOp() {
-        if (Crops.values()[pickedup].inSeason((double) Calendar.getInstance().get(Calendar.MONTH))) {
+        if (Crops.values()[pickedup].forceSeason == 2) {
+            score++;
+        } else if (Crops.values()[pickedup].forceSeason == 3) {
+            score = score - 2;
+        } else if(Crops.values()[pickedup].inSeason((double) Calendar.getInstance().get(Calendar.MONTH)) && Crops.values()[pickedup].forceSeason != 1){
             score++;
         } else {
             score--;
@@ -187,7 +195,10 @@ public class Seasonality extends JFrame {
     private void renderCrops(Graphics g) {
         if (gp.isVisible()) {
             if (this.isVisible() && pickedup > -1) {
-                g.drawImage(Crops.values()[pickedup].image, mi.dmx - Crops.values()[pickedup].image.getWidth() / 2, mi.dmy - Crops.values()[pickedup].image.getHeight() / 2, this);
+                try{
+                    g.drawImage(Crops.values()[pickedup].image, mi.dmx - Crops.values()[pickedup].image.getWidth() / 2, mi.dmy - Crops.values()[pickedup].image.getHeight() / 2, this);
+                }catch(ArrayIndexOutOfBoundsException e){
+                }
             }
         }
     }

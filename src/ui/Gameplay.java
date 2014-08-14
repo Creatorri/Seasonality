@@ -9,8 +9,6 @@ import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 import seasonality.Crops;
 import seasonality.Seasonality;
-import static seasonality.Seasonality.mi;
-import static seasonality.Seasonality.pickedup;
 import static seasonality.Seasonality.score;
 import static seasonality.Seasonality.timeLeft;
 
@@ -268,17 +266,16 @@ public class Gameplay extends JPanel implements Runnable {
 
     public synchronized void startGame(double mins) {
         stopGame();
-        run = true;
+        if(mins!=0){
+            run = true;
+            Seasonality.timeLeft = (long) (mins * 60);
+            countDown = new Thread(this, "Countdown");
+            countDown.start();
+        }
         Seasonality.mmp.setVisible(false);
-        Seasonality.timeLeft = (long) (mins * 60);
-        countDown = new Thread(this, "Countdown");
-        countDown.start();
     }
 
     public synchronized void stopGame() {
-        Seasonality.es.setVisible(false);
-        Seasonality.mmp.setVisible(true);
-        Seasonality.s.render();
         Seasonality.timeLeft = 0;
         run = false;
         for (int i = 0; i < Seasonality.pointTaken.length; i++) {
@@ -286,6 +283,9 @@ public class Gameplay extends JPanel implements Runnable {
             Seasonality.clicked[i] = false;
         }
         Seasonality.score = 0;
+        Seasonality.es.setVisible(false);
+        Seasonality.mmp.setVisible(true);
+        Seasonality.s.render();
     }
 
     @Override

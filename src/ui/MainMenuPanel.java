@@ -25,7 +25,7 @@ import static seasonality.Seasonality.yMult;
 public class MainMenuPanel extends JPanel {
 
     public MainMenuPanel() {
-        Seasonality.buttons.add(new MButton(750 / 2, 10, 100, 50, "Play Normal Mode", this));
+        Seasonality.buttons.add(new MButton(750 / 2, 10, 100, 50, "Play Seasonality", this));
         Seasonality.placeX.add(0.5);
         Seasonality.placeY.add(0.45);
         Seasonality.sizeX.add(0.2);
@@ -33,13 +33,14 @@ public class MainMenuPanel extends JPanel {
         Seasonality.buttons.get(Seasonality.buttons.size() - 1).setVisible(true);
         Seasonality.buttons.get(Seasonality.buttons.size() - 1).addListener(Seasonality.mbi);
 
-//        Seasonality.buttons.add(new MButton(750 / 2, 10, 100, 50, "Play Easy Mode", this));
-//        Seasonality.placeX.add(0.5);
-//        Seasonality.placeY.add(0.55);
-//        Seasonality.sizeX.add(0.2);
-//        Seasonality.sizeY.add(0.1);
-//        Seasonality.buttons.get(Seasonality.buttons.size() - 1).setVisible(true);
-//        Seasonality.buttons.get(Seasonality.buttons.size() - 1).addListener(Seasonality.mbi);
+        Seasonality.buttons.add(new MButton(750 / 2, 10, 100, 50, "Learn", this));
+        Seasonality.placeX.add(0.5);
+        Seasonality.placeY.add(0.55);
+        Seasonality.sizeX.add(0.2);
+        Seasonality.sizeY.add(0.1);
+        Seasonality.buttons.get(Seasonality.buttons.size() - 1).setVisible(true);
+        Seasonality.buttons.get(Seasonality.buttons.size() - 1).addListener(Seasonality.mbi);
+        
         Seasonality.buttons.add(new MButton(750 / 2, 10, 100, 50, "Quit", this));
         Seasonality.placeX.add(0.5);
         Seasonality.placeY.add(0.65);
@@ -49,7 +50,7 @@ public class MainMenuPanel extends JPanel {
         Seasonality.buttons.get(Seasonality.buttons.size() - 1).addListener(Seasonality.mbi);
     }
 
-    BufferedImage mmb;
+    public BufferedImage mmb;
 
     public void render(Graphics g) {
         if (mmb == null) {

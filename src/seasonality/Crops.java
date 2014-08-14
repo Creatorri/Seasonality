@@ -136,7 +136,6 @@ public enum Crops {
     }
 
     private class Season {
-
         public final static int DEFAULT = 0, FALSE = 1, TRUE = 2, NEVER = 3;
     }
 

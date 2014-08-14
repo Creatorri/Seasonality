@@ -21,21 +21,21 @@ public class MButtonInput {
         System.out.println("MBUTTON:" + command);
         lastCommand = command;
         if (parent == Seasonality.mmp) {
-            if (command.equalsIgnoreCase("Play Normal Mode")) {
+            if (command.equalsIgnoreCase("Play Seasonality")) {
                 Seasonality.mode = Seasonality.NORMAL_MODE;
                 Seasonality.mmp.setVisible(false);
                 Seasonality.gp.setVisible(true);
-                Seasonality.gp.startGame(10);
+                Seasonality.gp.startGame(1);
                 Seasonality.resetPaint = true;
                 Seasonality.score = 0;
                 Seasonality.s.render();
                 return;
             }
-            if (command.equalsIgnoreCase("Play Easy Mode")) {
+            if (command.equalsIgnoreCase("Learn")) {
                 Seasonality.mode = Seasonality.EASY_MODE;
                 Seasonality.mmp.setVisible(false);
                 Seasonality.gp.setVisible(true);
-                Seasonality.gp.startGame(10);
+                Seasonality.gp.startGame(0);
                 Seasonality.resetPaint = true;
                 Seasonality.score = 0;
                 Seasonality.s.render();
@@ -63,14 +63,6 @@ public class MButtonInput {
                     if (Seasonality.clicked[i]) {
 //                        Seasonality.clicked[i] = false;
 //                        Seasonality.pointTaken[i] = true;
-                        Seasonality.pickedup = i;
-                        if (Crops.values()[i].inSeason((double) Calendar.getInstance().get(Calendar.MONTH))) {
-                            Seasonality.score += 2;
-                        } else if (Crops.values()[i].forceSeason != 1) {
-                            Seasonality.score--;
-                        } else {
-                            Seasonality.score -= 2;
-                        }
                         break;
                     }
                 }
@@ -97,7 +89,15 @@ public class MButtonInput {
             }
             return;
         }
-        System.err.println("And this method (clicked(String)) was called for what reason?\n Non fatal error in MButtonInput.class: No corresponding action to button press \"" + command + "\"");
+        if(parent == Seasonality.es){
+            if (command.equalsIgnoreCase("Back To Menu")) {
+                Seasonality.es.setVisible(false);
+                Seasonality.mmp.setVisible(true);
+                Seasonality.s.render();
+                return;
+            }
+        }
+        System.err.println("And this method (MButtonInput.clicked(String)) was called for what reason?\n Non fatal error in MButtonInput.class: No corresponding action to button press \"" + command + "\"");
     }
 
 }
