@@ -13,12 +13,12 @@ public enum Crops {
     Apples(7, 10, Season.DEFAULT, "Draggy Drag the blue green dragon"),
     Peaches(6, 8, Season.DEFAULT, "Stuff"),
     Grapes(7, 8, Season.DEFAULT, "Stuff"),
-    Bananas(0, 0, Season.FALSE, "STUFF"),
-    Lemons(0, 0, Season.FALSE, "STUFF"),
-    Oranges(0, 0, Season.FALSE, "STUFF"),
+    Bananas(0, 0, Season.NEVER, "STUFF"),
+    Lemons(0, 0, Season.NEVER, "STUFF"),
+    Oranges(0, 0, Season.NEVER, "STUFF"),
     Cherries(5, 6, Season.DEFAULT, "STUFF"),
     Plums(6, 8, Season.DEFAULT, "STUFF"),
-    Avacado(0, 0, Season.FALSE, "STUFF"),//Add this next
+    Avocado(0, 0, Season.NEVER, "STUFF"),//Add this next
     Mushrooms(0, 0, Season.TRUE, "Stuff"),
     Cantelopes(7, 8, Season.DEFAULT, "STUFF"),
     Zucchinis(5, 9, Season.DEFAULT, "STUFF"),
@@ -33,12 +33,12 @@ public enum Crops {
     Lettuce(4, 11, Season.DEFAULT, "Stuff"),
     Garlic(5, 7, Season.DEFAULT, "STUFF"),//Storage?
     Watermelons(7, 8, Season.DEFAULT, "STUFF"),
-    Onions(4, 7, Season.FALSE, "STUFF"),//Storage?
+    Onions(4, 7, Season.DEFAULT, "STUFF"),//Storage?
     Strawberries(3.5, 6, Season.DEFAULT, "Stuff"),
     Eggplant(6, 9, Season.DEFAULT, "STUFF"),
     Corn(6, 9.5, Season.DEFAULT, "Stuff"),
     Swiss_Chard(4, 10, Season.DEFAULT, "STUFF"),
-    Pineapples(0, 0, Season.FALSE, "STUFF"),
+    Pineapples(0, 0, Season.NEVER, "STUFF"),
     Blueberries(5, 7.5, Season.DEFAULT, "Stuff"),
     Raspberries(5, 10, Season.DEFAULT, "Stuff");
 
@@ -46,7 +46,7 @@ public enum Crops {
     private final double START;
     private final double END;
     private final String[] DESCRIPTION;
-    public int forceSeason;//0 is use actual data, 1 is force false, 2 is force true
+    public int forceSeason;//0 is use actual data, 1 is force false, 2 is force true, 3 is not grown in PA
     public BufferedImage image;
     private final LoadArt la = new LoadArt();
 
@@ -136,15 +136,16 @@ public enum Crops {
     }
 
     private class Season {
-        public final static int DEFAULT = 0, FALSE = 1, TRUE = 2;
+
+        public final static int DEFAULT = 0, FALSE = 1, TRUE = 2, NEVER = 3;
     }
 
-    public void resizeImage(int sx, int sy){
+    public void resizeImage(int sx, int sy) {
         BufferedImage temp = image;
         BufferedImage out = new BufferedImage(sx, sy, BufferedImage.TYPE_INT_ARGB);
         out.createGraphics().drawImage(temp.getScaledInstance(sx, sy, Image.SCALE_SMOOTH), 0, 0, null);
         out.createGraphics().dispose();
         image = out;
     }
-    
+
 }

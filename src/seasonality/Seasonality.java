@@ -71,7 +71,6 @@ public class Seasonality extends JFrame {
     public Seasonality() {
         super("Seasonality");
         setSize(800, 600);
-        setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setFocusable(true);
@@ -79,9 +78,11 @@ public class Seasonality extends JFrame {
         setResizable(false);
         addMouseListener(mi);
         addMouseMotionListener(mi);
+        setVisible(true);
         o = new StartupOptions();
         o.setVisible(true);
         add(o);
+        o.done.setEnabled(false);
         o.updateUI();
         mmp = new MainMenuPanel();
         mmp.setVisible(false);
@@ -89,6 +90,7 @@ public class Seasonality extends JFrame {
         gp = new Gameplay();
         gp.setVisible(false);
         add(gp);
+        o.done.setEnabled(true);
     }
 
     public void fullScreen() {
@@ -96,13 +98,10 @@ public class Seasonality extends JFrame {
     }
 
     public static int renders = 0;
-    
-    public static int l;
 
     public void render() {
 
-        long start = System.nanoTime();
-
+//        long start = System.nanoTime();
         xMult = getWidth() / 1174.0;
         yMult = getHeight() / 868.0;
 
@@ -131,6 +130,8 @@ public class Seasonality extends JFrame {
 
         updateButtons(g, gp.isVisible());
 
+        renderCrops(g);
+
         g.dispose();
         bs.show();
 
@@ -138,33 +139,31 @@ public class Seasonality extends JFrame {
             renders++;
         }
 
-        System.out.println("That update took " + (System.nanoTime() - start) / (1.0E9) + " seconds.");
+//        System.out.println("That update took " + (System.nanoTime() - start) / (1.0E9) + " seconds.");
     }
-    
+
     /**
-     * updates both buttons and action areas if justButtons is false
-     * @param g 
-     * @param justButtons 
+     * updates both buttons and action areas if everything is true, else just
+     * buttons
+     *
+     * @param g
+     * @param everything
      */
-    public void updateButtons(Graphics g, boolean justButtons){
-        
-        l = justButtons ? buttons.size() : aa.size();
-        
-        for (int i = 0; i < l; i++) {
-            if (i < buttons.size()) {
-                if (buttons.get(i) == null) {
-                }else if (!buttons.get(i).parent.isVisible() || !buttons.get(i).visible) {
-                }else{
-                    g.drawImage(buttons.get(i).img, buttons.get(i).x, buttons.get(i).y, this);
-                }
+    public void updateButtons(Graphics g, boolean everything) {
+
+        for (MButton button : buttons) {
+            if (button.parent.isVisible() && button.visible) {
+                g.drawImage(button.img, button.x, button.y, this);
             }
-            if (i < aa.size() && gp.isVisible()) {
-                if (pointTaken[aa.get(i).data.ordinal()]) {
-                    g.drawImage(aa.get(i).img, aa.get(i).x, aa.get(i).y, this);
+        }
+
+        if (everything) {
+            for (ActionArea aa1 : aa) {
+                if (pointTaken[aa1.data.ordinal()]) {
+                    g.drawImage(aa1.img, aa1.x, aa1.y, this);
                 }
             }
         }
-        
     }
 
     public void paint(Graphics g) {
@@ -183,6 +182,14 @@ public class Seasonality extends JFrame {
         }
         pointTaken[pickedup] = true;
         pickedup = -1;
+    }
+
+    private void renderCrops(Graphics g) {
+        if (gp.isVisible()) {
+            if (this.isVisible() && pickedup > -1) {
+                g.drawImage(Crops.values()[pickedup].image, mi.dmx - Crops.values()[pickedup].image.getWidth() / 2, mi.dmy - Crops.values()[pickedup].image.getHeight() / 2, this);
+            }
+        }
     }
 
 }

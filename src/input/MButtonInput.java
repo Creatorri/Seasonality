@@ -25,7 +25,7 @@ public class MButtonInput {
                 Seasonality.mode = Seasonality.NORMAL_MODE;
                 Seasonality.mmp.setVisible(false);
                 Seasonality.gp.setVisible(true);
-                Seasonality.gp.startGame(1);
+                Seasonality.gp.startGame(10);
                 Seasonality.resetPaint = true;
                 Seasonality.score = 0;
                 Seasonality.s.render();
@@ -35,7 +35,7 @@ public class MButtonInput {
                 Seasonality.mode = Seasonality.EASY_MODE;
                 Seasonality.mmp.setVisible(false);
                 Seasonality.gp.setVisible(true);
-                Seasonality.gp.startGame(3);
+                Seasonality.gp.startGame(10);
                 Seasonality.resetPaint = true;
                 Seasonality.score = 0;
                 Seasonality.s.render();
@@ -65,9 +65,11 @@ public class MButtonInput {
 //                        Seasonality.pointTaken[i] = true;
                         Seasonality.pickedup = i;
                         if (Crops.values()[i].inSeason((double) Calendar.getInstance().get(Calendar.MONTH))) {
-                            Seasonality.score++;
-                        } else {
+                            Seasonality.score += 2;
+                        } else if (Crops.values()[i].forceSeason != 1) {
                             Seasonality.score--;
+                        } else {
+                            Seasonality.score -= 2;
                         }
                         break;
                     }

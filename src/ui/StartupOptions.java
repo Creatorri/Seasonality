@@ -88,24 +88,24 @@ public class StartupOptions extends javax.swing.JPanel {
 
     private void cropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cropActionPerformed
         boolean season = Crops.values()[crop.getSelectedIndex()].inSeason((double) Calendar.getInstance().get(Calendar.MONTH));
-        if(season){
+        if (season) {
             inseason.setSelectedIndex(0);
-        }else{
+        } else {
             inseason.setSelectedIndex(1);
         }
     }//GEN-LAST:event_cropActionPerformed
 
     private void useThisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_useThisActionPerformed
-        if(inseason.getSelectedIndex() == 1){
+        if (inseason.getSelectedIndex() == 1) {
             Crops.values()[crop.getSelectedIndex()].forceSeason(true);
-        }else{
+        } else {
             Crops.values()[crop.getSelectedIndex()].forceSeason(false);
         }
     }//GEN-LAST:event_useThisActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox crop;
-    private javax.swing.JButton done;
+    public javax.swing.JButton done;
     private javax.swing.JComboBox inseason;
     private javax.swing.JButton useThis;
     // End of variables declaration//GEN-END:variables
