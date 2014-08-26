@@ -30,15 +30,7 @@ public class Gameplay extends JPanel implements Runnable {
         Seasonality.buttons.get(Seasonality.buttons.size() - 1).setVisible(true);
         Seasonality.buttons.get(Seasonality.buttons.size() - 1).addListener(Seasonality.mbi);
 
-        Seasonality.buttons.add(new MButton(750 / 2, 10, 100, 50, "Pick Up", this));
-        Seasonality.placeX.add(0.30);
-        Seasonality.placeY.add(0.725);
-        Seasonality.sizeX.add(0.1);
-        Seasonality.sizeY.add(0.05);
-        Seasonality.buttons.get(Seasonality.buttons.size() - 1).setVisible(false);
-        Seasonality.buttons.get(Seasonality.buttons.size() - 1).addListener(Seasonality.mbi);
-
-        Seasonality.buttons.add(new MButton(750 / 2, 10, 100, 50, "Put Back", this));
+        Seasonality.buttons.add(new MButton(750 / 2, 10, 100, 50, "Back", this));
         Seasonality.placeX.add(0.70);
         Seasonality.placeY.add(0.725);
         Seasonality.sizeX.add(0.1);

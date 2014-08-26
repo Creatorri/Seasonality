@@ -54,8 +54,8 @@ public class Seasonality extends JFrame {
     //Score
     public static int score = 0;
     //Mode
-    public static final int EASY_MODE = 0;
-    public static final int NORMAL_MODE = 1;
+    public static final int LEARN_MODE = 0;
+    public static final int PLAY_MODE = 1;
     public static int mode = 0;
     //Reder Points
     public static double xMult = 1920.0 / 1174.0;
@@ -193,7 +193,7 @@ public class Seasonality extends JFrame {
     }
 
     private void renderCrops(Graphics g) {
-        if (gp.isVisible()) {
+        if (gp.isVisible() && mode == PLAY_MODE) {
             if (this.isVisible() && pickedup > -1) {
                 try{
                     g.drawImage(Crops.values()[pickedup].image, mi.dmx - Crops.values()[pickedup].image.getWidth() / 2, mi.dmy - Crops.values()[pickedup].image.getHeight() / 2, this);

@@ -1,7 +1,6 @@
 package input;
 
 import java.awt.Component;
-import java.util.Calendar;
 import seasonality.Crops;
 import seasonality.Seasonality;
 
@@ -22,7 +21,7 @@ public class MButtonInput {
         lastCommand = command;
         if (parent == Seasonality.mmp) {
             if (command.equalsIgnoreCase("Play Seasonality")) {
-                Seasonality.mode = Seasonality.NORMAL_MODE;
+                Seasonality.mode = Seasonality.PLAY_MODE;
                 Seasonality.mmp.setVisible(false);
                 Seasonality.gp.setVisible(true);
                 Seasonality.gp.startGame(1);
@@ -32,7 +31,7 @@ public class MButtonInput {
                 return;
             }
             if (command.equalsIgnoreCase("Learn")) {
-                Seasonality.mode = Seasonality.EASY_MODE;
+                Seasonality.mode = Seasonality.LEARN_MODE;
                 Seasonality.mmp.setVisible(false);
                 Seasonality.gp.setVisible(true);
                 Seasonality.gp.startGame(0);
@@ -53,19 +52,8 @@ public class MButtonInput {
                 Seasonality.s.render();
                 return;
             }
-            if (command.equalsIgnoreCase("put back")) {
+            if (command.equalsIgnoreCase("Back")) {
                 Seasonality.pickedup = -1;
-                Seasonality.resetPaint = true;
-                return;
-            }
-            if (command.equalsIgnoreCase("Pick up")) {
-                for (int i = 0; i < Seasonality.clicked.length; i++) {
-                    if (Seasonality.clicked[i]) {
-//                        Seasonality.clicked[i] = false;
-//                        Seasonality.pointTaken[i] = true;
-                        break;
-                    }
-                }
                 Seasonality.resetPaint = true;
                 return;
             }
@@ -75,7 +63,7 @@ public class MButtonInput {
                 }
                 if (command.equalsIgnoreCase(Crops.values()[i].toString())) {
                     Seasonality.update = true;
-                    if (Seasonality.mode == Seasonality.NORMAL_MODE) {
+                    if (Seasonality.mode == Seasonality.PLAY_MODE) {
                         Seasonality.pickedup = i;
                         break;
                     }

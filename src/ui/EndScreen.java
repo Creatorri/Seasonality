@@ -20,7 +20,7 @@ public class EndScreen extends JPanel {
         setVisible(false);
         Seasonality.buttons.add(new MButton(750 / 2, 10, 100, 50, "Back To Menu", this));
         Seasonality.placeX.add(0.5);
-        Seasonality.placeY.add(0.95);
+        Seasonality.placeY.add(0.9);
         Seasonality.sizeX.add(0.2);
         Seasonality.sizeY.add(0.1);
         Seasonality.buttons.get(Seasonality.buttons.size() - 1).setVisible(true);
