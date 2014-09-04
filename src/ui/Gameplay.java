@@ -20,9 +20,11 @@ public class Gameplay extends JPanel implements Runnable {
 
     public Thread countDown = new Thread("Countdown");
     private boolean run = false;
+    
+    public int backNum = 0;
 
     public Gameplay() {
-        Seasonality.buttons.add(new MButton(750 / 2, 10, 100, 50, "Back To Menu", this));
+        Seasonality.buttons.add(new MButton("Back To Menu", this));
         Seasonality.placeX.add(0.05);
         Seasonality.placeY.add(0.975);
         Seasonality.sizeX.add(0.1);
@@ -30,9 +32,10 @@ public class Gameplay extends JPanel implements Runnable {
         Seasonality.buttons.get(Seasonality.buttons.size() - 1).setVisible(true);
         Seasonality.buttons.get(Seasonality.buttons.size() - 1).addListener(Seasonality.mbi);
 
-        Seasonality.buttons.add(new MButton(750 / 2, 10, 100, 50, "Back", this));
-        Seasonality.placeX.add(0.70);
-        Seasonality.placeY.add(0.725);
+        backNum = Seasonality.buttons.size();
+        Seasonality.buttons.add(new MButton("Back", this));
+        Seasonality.placeX.add((1.0/2.0));
+        Seasonality.placeY.add((2.0/3.0) - (0.025));
         Seasonality.sizeX.add(0.1);
         Seasonality.sizeY.add(0.05);
         Seasonality.buttons.get(Seasonality.buttons.size() - 1).setVisible(false);
@@ -261,10 +264,11 @@ public class Gameplay extends JPanel implements Runnable {
         if(mins!=0){
             run = true;
             Seasonality.timeLeft = (long) (mins * 60);
-            countDown = new Thread(this, "Countdown");
-            countDown.start();
         }
+        countDown = new Thread(this, "Countdown");
+        countDown.start();
         Seasonality.mmp.setVisible(false);
+        Seasonality.gp.setVisible(true);
     }
 
     public synchronized void stopGame() {
@@ -275,6 +279,7 @@ public class Gameplay extends JPanel implements Runnable {
             Seasonality.clicked[i] = false;
         }
         Seasonality.score = 0;
+        Seasonality.gp.setVisible(false);
         Seasonality.es.setVisible(false);
         Seasonality.mmp.setVisible(true);
         Seasonality.s.render();
@@ -283,17 +288,20 @@ public class Gameplay extends JPanel implements Runnable {
     @Override
     public void run() {
         long s = System.currentTimeMillis() / 1000;
-        while (Seasonality.timeLeft > 0 && run) {
-            if (s != (System.currentTimeMillis() / 1000)) {
+        while ((Seasonality.timeLeft > 0 || Seasonality.mode == Seasonality.LEARN_MODE) && run) {
+            if (s != (System.currentTimeMillis() / 1000) && Seasonality.mode != Seasonality.LEARN_MODE) {
                 s = System.currentTimeMillis() / 1000;
                 Seasonality.timeLeft--;
             }
             Seasonality.s.render();
         }
-        System.out.println("Game Ended");
-        Seasonality.gp.setVisible(false);
-        Seasonality.es.setVisible(true);
-        Seasonality.pickedup = -1;
+        if(!run){
+            System.out.println("Game Ended");
+            Seasonality.gp.setVisible(false);
+            Seasonality.es.setVisible(true);
+            Seasonality.pickedup = -1;
+            Seasonality.s.render();
+        }
         Seasonality.s.render();
     }
 
@@ -321,6 +329,22 @@ public class Gameplay extends JPanel implements Runnable {
         g.fillRect((int) (Seasonality.s.getHeight() * (30.0 / 1080.0)), (int) (Seasonality.s.getHeight() * (75.0 / 1080.0)), g.getFontMetrics().stringWidth("Score: " + score), (int) (Seasonality.s.getHeight() * (52.0 / 1080.0)));
         g.setColor(Color.WHITE);
         g.drawString("Score: " + score, (int) (Seasonality.s.getHeight() * (30.0 / 1080.0)), (int) (Seasonality.s.getHeight() * (120.0 / 1080.0)));
+        
+        if(Seasonality.mode == Seasonality.LEARN_MODE && cropNum != -1){
+            renderL(g);
+        }
     }
-
+    
+    public int cropNum = -1;
+    public void renderL(Graphics g){
+        if(cropNum == -1) return;
+        g.setColor(Color.GREEN);
+        g.fillRoundRect((int) (Seasonality.s.getWidth() * (1.0/3.0)), (int) (Seasonality.s.getHeight() * (1.0/3.0)), (int) (Seasonality.s.getWidth() * (1.0/3.0)), (int) (Seasonality.s.getHeight() * (1.0/3.0)), 10, 10);
+        g.setColor(Color.BLACK);
+        if(cropNum == -1) return;
+        g.drawString(Crops.values()[cropNum].toString(), (int) (Seasonality.s.getWidth()*(1.0/2.0)-g.getFontMetrics().stringWidth(Crops.values()[cropNum].toString())/2.0), (int) (getHeight() * (4.6/12.0) + 5));
+        for(int i=0;i<Crops.values()[cropNum].getDescription().length;i++){
+            g.drawString(Crops.values()[cropNum].getDescription()[i], (int) (Seasonality.s.getWidth()*(1.0/2.0) - g.getFontMetrics().stringWidth(Crops.values()[cropNum].toString())/2.0), (int) (getHeight() * (4.6/12.0) + 5 + (i+1) * (Seasonality.s.getHeight() * (53.0 / 1080.0))));
+        }
+    }
 }

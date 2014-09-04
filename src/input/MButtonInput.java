@@ -34,7 +34,7 @@ public class MButtonInput {
                 Seasonality.mode = Seasonality.LEARN_MODE;
                 Seasonality.mmp.setVisible(false);
                 Seasonality.gp.setVisible(true);
-                Seasonality.gp.startGame(0);
+                Seasonality.gp.startGame(1);
                 Seasonality.resetPaint = true;
                 Seasonality.score = 0;
                 Seasonality.s.render();
@@ -49,12 +49,16 @@ public class MButtonInput {
         if (parent == Seasonality.gp) {
             if (command.equalsIgnoreCase("Back To Menu")) {
                 Seasonality.gp.stopGame();
+                Seasonality.mmp.setVisible(true);
                 Seasonality.s.render();
                 return;
             }
-            if (command.equalsIgnoreCase("Back")) {
-                Seasonality.pickedup = -1;
-                Seasonality.resetPaint = true;
+            if(Seasonality.gp.cropNum!=-1 && Seasonality.mode==Seasonality.LEARN_MODE){
+                if (command.equalsIgnoreCase("Back")) {
+                    Seasonality.gp.cropNum = -1;
+                    Seasonality.buttons.get(Seasonality.gp.backNum).setVisible(false);
+                    Seasonality.s.render();
+                }
                 return;
             }
             for (int i = 0; i < Crops.values().length; i++) {
@@ -67,10 +71,10 @@ public class MButtonInput {
                         Seasonality.pickedup = i;
                         break;
                     }
-                    for (MButton m : Seasonality.buttons) {
-                        if (m.name.equalsIgnoreCase("Pick Up") || m.name.equalsIgnoreCase("Put Back")) {
-                            m.setVisible(true);
-                        }
+                    if(Seasonality.mode == Seasonality.LEARN_MODE && Seasonality.gp.cropNum == -1){
+                        Seasonality.gp.cropNum = i;
+                        Seasonality.buttons.get(Seasonality.gp.backNum).setVisible(true);
+                        break;
                     }
                     break;
                 }

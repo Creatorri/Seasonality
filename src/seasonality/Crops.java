@@ -3,6 +3,7 @@ package seasonality;
 import assets.LoadArt;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.util.Calendar;
 
 /**
  *
@@ -147,4 +148,19 @@ public enum Crops {
         image = out;
     }
 
+    public static int maxScore(){
+        int score = 0;
+        for (Crops value : values()) {
+            if (value.forceSeason == 2) {
+                score++;
+            } else if (value.forceSeason == 3) {
+//                score = score - 2;
+            } else if (value.inSeason((double) Calendar.getInstance().get(Calendar.MONTH)) && value.forceSeason != 1) {
+                score++;
+            } else {
+//                score--;
+            }
+        }
+        return score;
+    }
 }

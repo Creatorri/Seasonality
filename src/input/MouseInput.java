@@ -26,12 +26,14 @@ public class MouseInput implements MouseListener, MouseMotionListener {
         mx = e.getX();
         my = e.getY();
 //        System.out.println(mx + "/" + Seasonality.s.getWidth() + " , " + my + "/" + Seasonality.s.getHeight());
-        for (ActionArea aa : Seasonality.aa) {
-            if (!aa.parent.isVisible()) {
-                continue;
-            }
-            if (aa.update(mx, my)) {
-                return;
+        if((Seasonality.gp.cropNum == -1 && Seasonality.mode == Seasonality.LEARN_MODE) || Seasonality.mode == Seasonality.PLAY_MODE){
+            for (ActionArea aa : Seasonality.aa) {
+                if (!aa.parent.isVisible()) {
+                    continue;
+                }
+                if (aa.update(mx, my)) {
+                    return;
+                }
             }
         }
         for (MButton button : Seasonality.buttons) {

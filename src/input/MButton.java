@@ -16,14 +16,14 @@ import java.awt.image.BufferedImage;
 public class MButton {
 
     public BufferedImage img;
-    public int x;
-    public int y;
+    public int x = 1;
+    public int y = 1;
     public boolean visible = true;
     private boolean isListened = false;
     protected final LoadArt la = new LoadArt();
     private MButtonInput mbi;
-    public int sx;
-    public int sy;
+    public int sx = 1;
+    public int sy = 1;
     public final String name;
     private String data;
     public Component parent;
@@ -31,36 +31,13 @@ public class MButton {
     /**
      * Makes a MButton
      *
-     * @param x1 top left corner
-     * @param y1 top left corner
-     * @param sx1 width
-     * @param sy1 height
      * @param name1 name
      * @param parent1
      */
-    public MButton(int x1, int y1, int sx1, int sy1, String name1, Component parent1) {
-        x = x1;
-        y = y1;
-        sx = sx1;
-        sy = sy1;
+    public MButton(String name1, Component parent1) {
         name = name1;
-        img = la.createBufferedImage("Button.png", sx, sy);
         parent = parent1;
         isListened = false;
-        Graphics2D g = img.createGraphics();
-        g.setColor(Color.BLACK);
-        g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, sy / 2));
-        FontMetrics fm = g.getFontMetrics(g.getFont());
-        int width = fm.stringWidth(name);
-        int div = 2;
-        while (width > sx) {
-            div++;
-            g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, sy / div));
-            fm = g.getFontMetrics(g.getFont());
-            width = fm.stringWidth(name);
-        }
-        g.drawString(name, sx / 2 - width / 2, (sy / 2) + ((sy / div) / 2));
-        g.dispose();
     }
 
     public void setVisible(boolean show) {

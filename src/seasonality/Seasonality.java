@@ -95,12 +95,22 @@ public class Seasonality extends JFrame {
         //Allows User To Continue
         o.done.setEnabled(true);
     }
+    
+    public void buttonSize(){
+        for (int i = 0; i < aa.size(); i++) {
+            aa.get(i).setPos((int) (aaX.get(i) * xMult), (int) (aaY.get(i) * yMult), (int) (aasX.get(i) * xMult), (int) (aasY.get(i) * yMult));
+            aa.get(i).data.resizeImage((int) (aasX.get(i) * xMult), (int) (aasY.get(i) * yMult));
+        }
+        for (int i = 0; i < buttons.size(); i++) {
+            buttons.get(i).setPos((int) ((placeX.get(i) * Seasonality.s.getWidth()) - (0.5 * sizeX.get(i) * Seasonality.s.getWidth())), (int) ((placeY.get(i) * Seasonality.s.getHeight()) - (0.5 * sizeY.get(i) * Seasonality.s.getHeight())), (int) (sizeX.get(i) * Seasonality.s.getWidth()), (int) (sizeY.get(i) * Seasonality.s.getHeight()));
+        }
+    }
 
     public void fullScreen() {
         GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().setFullScreenWindow(s);
+        render();
+        buttonSize();
     }
-
-    public static int renders = 0;
 
     public void render() {
 
@@ -138,10 +148,6 @@ public class Seasonality extends JFrame {
 
         g.dispose();
         bs.show();
-
-        if (timeLeft == 5 * (60000) && renders < 5) {
-            renders++;
-        }
 
 //        System.out.println("That update took " + (System.nanoTime() - start) / (1.0E9) + " seconds.");
     }
