@@ -295,7 +295,7 @@ public class Gameplay extends JPanel implements Runnable {
             }
             Seasonality.s.render();
         }
-        if(!run){
+        if(run){
             System.out.println("Game Ended");
             Seasonality.gp.setVisible(false);
             Seasonality.es.setVisible(true);
