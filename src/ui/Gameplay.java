@@ -336,15 +336,19 @@ public class Gameplay extends JPanel implements Runnable {
     }
     
     public int cropNum = -1;
-    public void renderL(Graphics g){
+    public synchronized void renderL(Graphics g){
         if(cropNum == -1) return;
         g.setColor(Color.GREEN);
         g.fillRoundRect((int) (Seasonality.s.getWidth() * (1.0/3.0)), (int) (Seasonality.s.getHeight() * (1.0/3.0)), (int) (Seasonality.s.getWidth() * (1.0/3.0)), (int) (Seasonality.s.getHeight() * (1.0/3.0)), 10, 10);
         g.setColor(Color.BLACK);
         if(cropNum == -1) return;
-        g.drawString(Crops.values()[cropNum].toString(), (int) (Seasonality.s.getWidth()*(1.0/2.0)-g.getFontMetrics().stringWidth(Crops.values()[cropNum].toString())/2.0), (int) (getHeight() * (4.6/12.0) + 5));
+        if(cropNum != 1) g.drawString(Crops.values()[cropNum].toString(), (int) (Seasonality.s.getWidth()*(1.0/2.0)-g.getFontMetrics().stringWidth(Crops.values()[cropNum].toString())/2.0), (int) (getHeight() * (4.6/12.0) + 5));
+        g.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, (int) (Seasonality.s.getHeight() * (30.0 / 1080.0))));
+        if(cropNum == -1) return;
         for(int i=0;i<Crops.values()[cropNum].getDescription().length;i++){
-            g.drawString(Crops.values()[cropNum].getDescription()[i], (int) (Seasonality.s.getWidth()*(1.0/2.0) - g.getFontMetrics().stringWidth(Crops.values()[cropNum].toString())/2.0), (int) (getHeight() * (4.6/12.0) + 5 + (i+1) * (Seasonality.s.getHeight() * (53.0 / 1080.0))));
+            if(cropNum == -1) return;
+            g.drawString(Crops.values()[cropNum].getDescription()[i], (int) (Seasonality.s.getWidth()/2.0 - g.getFontMetrics().stringWidth(Crops.values()[cropNum].getDescription()[i])/2.0), (int) (getHeight() * (4.6/12.0) + 5 + (i+1) * (Seasonality.s.getHeight() * (53.0 / 1080.0))));
+            if(cropNum == -1) return;
         }
     }
 }

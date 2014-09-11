@@ -36,7 +36,7 @@ public class StartupOptions extends javax.swing.JPanel {
         useThis = new javax.swing.JButton();
         done = new javax.swing.JButton();
 
-        crop.setModel(new javax.swing.DefaultComboBoxModel(seasonality.Crops.values()));
+        crop.setModel(new javax.swing.DefaultComboBoxModel(seasonality.Crops.editableCrops()));
         crop.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cropActionPerformed(evt);

@@ -11,37 +11,37 @@ import java.util.Calendar;
  */
 public enum Crops {
 
-    Apples(7, 10, Season.DEFAULT, "Draggy Drag the blue green dragon"),
-    Peaches(6, 8, Season.DEFAULT, "Stuff"),
-    Grapes(7, 8, Season.DEFAULT, "Stuff"),
-    Bananas(0, 0, Season.NEVER, "STUFF"),
-    Lemons(0, 0, Season.NEVER, "STUFF"),
-    Oranges(0, 0, Season.NEVER, "STUFF"),
-    Cherries(5, 6, Season.DEFAULT, "STUFF"),
-    Plums(6, 8, Season.DEFAULT, "STUFF"),
-    Avocado(0, 0, Season.NEVER, "STUFF"),//Add this next
-    Mushrooms(0, 0, Season.TRUE, "Stuff"),
-    Cantelopes(7, 8, Season.DEFAULT, "STUFF"),
-    Zucchinis(5, 9, Season.DEFAULT, "STUFF"),
-    Sweet_Peppers(7, 9, Season.DEFAULT, "Stuff"),
-    Peas(5, 6, Season.DEFAULT, "Stuff"),
-    Radishes(5, 11, Season.DEFAULT, "Stuff"),
-    Carrots(6, 11, Season.DEFAULT, "Stuff"),
-    Pumpkins(8, 12, Season.DEFAULT, "Stuff"),
-    Sweet_Potatoes(8.5, 11, Season.DEFAULT, "Stuff"),
-    Tomatoes(5.5, 10, Season.DEFAULT, "Stuff"),
-    Asparagus(3.5, 5.5, Season.DEFAULT, "Stuff"),
-    Lettuce(4, 11, Season.DEFAULT, "Stuff"),
-    Garlic(5, 7, Season.DEFAULT, "STUFF"),//Storage?
-    Watermelons(7, 8, Season.DEFAULT, "STUFF"),
-    Onions(4, 7, Season.DEFAULT, "STUFF"),//Storage?
-    Strawberries(3.5, 6, Season.DEFAULT, "Stuff"),
-    Eggplant(6, 9, Season.DEFAULT, "STUFF"),
-    Corn(6, 9.5, Season.DEFAULT, "Stuff"),
-    Swiss_Chard(4, 10, Season.DEFAULT, "STUFF"),
-    Pineapples(0, 0, Season.NEVER, "STUFF"),
-    Blueberries(5, 7.5, Season.DEFAULT, "Stuff"),
-    Raspberries(5, 10, Season.DEFAULT, "Stuff");
+    Apples(7, 10, Season.DEFAULT,           "harvested in the Lehigh Valley", "from August to November.", "Stored appeles are available through March."),
+    Peaches(6, 8, Season.DEFAULT,           "harvested in the Lehigh Valley", "from July to September."),
+    Grapes(7, 8, Season.DEFAULT,            "harvested in the Lehigh Valley", "in September."),
+    Bananas(0, 0, Season.NEVER,             "grown in tropical climates", "and are not grown in the Lehigh Valley."),
+    Lemons(0, 0, Season.NEVER,              "grown in subtropical climates", "and are not grown in the Lehigh Valley."),
+    Oranges(0, 0, Season.NEVER,             "grown in subtropical climates", "and are not grown in the Lehigh Vally."),
+    Cherries(5, 6, Season.DEFAULT,          "harvested in the Lehigh Valley", "from June through July."),
+    Plums(6, 8, Season.DEFAULT,             "harvested in the Lehigh Valley", "from July through September."),
+    Avocado(0, 0, Season.NEVER,             "grown in subtropical climates", "and are not grown in the Lehigh Valley."),
+    Mushrooms(0, 0, Season.TRUE,            "harvested in the Lehigh Valley", "throughout the year."),
+    Cantelopes(7, 8, Season.DEFAULT,        "harvested in the Lehigh Valley", "from August through September."),
+    Zucchinis(5, 9, Season.DEFAULT,         "harvested in the Lehigh Valley", "from June through October."),
+    Sweet_Peppers(7, 9, Season.DEFAULT,     "harvested in the Lehigh Valley", "from August through November."),
+    Peas(5, 6, Season.DEFAULT,              "harvested in the Lehigh Valley", "in June."),
+    Radishes(5, 11, Season.DEFAULT,         "harvested in the Lehigh Valley", "from May through November.", "Stored radishes are available through April."),
+    Carrots(6, 11, Season.DEFAULT,          "harvested in the Lehigh Valley", "from July through November.", "Stored carrots are available through March."),
+    Pumpkins(8, 12, Season.DEFAULT,         "harvested in the Lehigh Valley", "from September through November.", "Stored apples are available through mid-February."),
+    Sweet_Potatoes(8.5, 11, Season.DEFAULT, "harvested in the Lehigh Valley", "from September through November.", "Stored sweet potatoes are available through March."),
+    Tomatoes(5.5, 10, Season.DEFAULT,       "harvested in the Lehigh Valley", "from July through November."),
+    Asparagus(3.5, 5.5, Season.DEFAULT,     "harvested in the Lehigh Valley", "from mid-April through mid-June."),
+    Lettuce(4, 11, Season.DEFAULT,          "harvested in the Lehigh Valley", "from May through November."),
+    Garlic(5, 7, Season.DEFAULT,            "harvested in the Lehigh Valley", "from July through August.", "Stored garlic is available through April."),
+    Watermelons(7, 8, Season.DEFAULT,       "harvested in the Lehigh Valley", "from August through September."),
+    Onions(4, 7, Season.DEFAULT,            "harvested in the Lehigh Valley", "from May through August.", "Stored apples are available through March."),
+    Strawberries(3.5, 6, Season.DEFAULT,    "harvested in the Lehigh Valley", "in June."),
+    Eggplant(6, 9, Season.DEFAULT,          "harvested in the Lehigh Valley", "from July through mid-October."),
+    Corn(6, 9.5, Season.DEFAULT,            "harvested in the Lehigh Valley", "from July through mid-October."),
+    Swiss_Chard(4, 10, Season.DEFAULT,      "harvested in the Lehigh Valley", "from May through November."),
+    Pineapples(0, 0, Season.NEVER,          "grown in tropical climates", "and are not grown in the Lehigh Valley."),
+    Blueberries(5, 7.5, Season.DEFAULT,     "harvested in the Lehigh Valley", "from June through mid-August."),
+    Raspberries(5, 10, Season.DEFAULT,      "harvested in the Lehigh Valley", "from June through October.");
 
     //month 0 is jan
     private final double START;
@@ -64,6 +64,24 @@ public enum Crops {
         } else {
             image = la.createBufferedImage(this.toString().toLowerCase() + ".png");
         }
+    }
+    
+    public static Crops[] editableCrops(){
+        int j = 0;
+        for (Crops value : Crops.values()) {
+            if (value.forceSeason == Season.NEVER) {
+                j++;
+            }
+        }
+        Crops[] edit = new Crops[j];
+        j = 0;
+        for (Crops value : Crops.values()) {
+            if (value.forceSeason == Season.NEVER) {
+                edit[j] = value;
+                j++;
+            }
+        }
+        return edit;
     }
 
     public void forceSeason(boolean inseason) {
