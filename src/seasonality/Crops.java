@@ -11,7 +11,7 @@ import java.util.Calendar;
  */
 public enum Crops {
 
-    Apples(7, 10, Season.DEFAULT,           "harvested in the Lehigh Valley", "from August to November.", "Stored appeles are available through March."),
+    Apples(7, 10, Season.DEFAULT,           "harvested in the Lehigh Valley", "from August to November.", "Stored apples are available through March."),
     Peaches(6, 8, Season.DEFAULT,           "harvested in the Lehigh Valley", "from July to September."),
     Grapes(7, 8, Season.DEFAULT,            "harvested in the Lehigh Valley", "in September."),
     Bananas(0, 0, Season.NEVER,             "grown in tropical climates", "and are not grown in the Lehigh Valley."),
@@ -27,14 +27,14 @@ public enum Crops {
     Peas(5, 6, Season.DEFAULT,              "harvested in the Lehigh Valley", "in June."),
     Radishes(5, 11, Season.DEFAULT,         "harvested in the Lehigh Valley", "from May through November.", "Stored radishes are available through April."),
     Carrots(6, 11, Season.DEFAULT,          "harvested in the Lehigh Valley", "from July through November.", "Stored carrots are available through March."),
-    Pumpkins(8, 12, Season.DEFAULT,         "harvested in the Lehigh Valley", "from September through November.", "Stored apples are available through mid-February."),
+    Pumpkins(8, 12, Season.DEFAULT,         "harvested in the Lehigh Valley", "from September through November.", "Stored pumpkins are available through mid-February."),
     Sweet_Potatoes(8.5, 11, Season.DEFAULT, "harvested in the Lehigh Valley", "from September through November.", "Stored sweet potatoes are available through March."),
     Tomatoes(5.5, 10, Season.DEFAULT,       "harvested in the Lehigh Valley", "from July through November."),
     Asparagus(3.5, 5.5, Season.DEFAULT,     "harvested in the Lehigh Valley", "from mid-April through mid-June."),
     Lettuce(4, 11, Season.DEFAULT,          "harvested in the Lehigh Valley", "from May through November."),
     Garlic(5, 7, Season.DEFAULT,            "harvested in the Lehigh Valley", "from July through August.", "Stored garlic is available through April."),
     Watermelons(7, 8, Season.DEFAULT,       "harvested in the Lehigh Valley", "from August through September."),
-    Onions(4, 7, Season.DEFAULT,            "harvested in the Lehigh Valley", "from May through August.", "Stored apples are available through March."),
+    Onions(4, 7, Season.DEFAULT,            "harvested in the Lehigh Valley", "from May through August.", "Stored onions are available through March."),
     Strawberries(3.5, 6, Season.DEFAULT,    "harvested in the Lehigh Valley", "in June."),
     Eggplant(6, 9, Season.DEFAULT,          "harvested in the Lehigh Valley", "from July through mid-October."),
     Corn(6, 9.5, Season.DEFAULT,            "harvested in the Lehigh Valley", "from July through mid-October."),
