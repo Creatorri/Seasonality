@@ -36,14 +36,18 @@ public class StartupOptions extends javax.swing.JPanel {
         useThis = new javax.swing.JButton();
         done = new javax.swing.JButton();
 
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         crop.setModel(new javax.swing.DefaultComboBoxModel(seasonality.Crops.editableCrops()));
         crop.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cropActionPerformed(evt);
             }
         });
+        add(crop, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 113, 251, 80));
 
         inseason.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "In Season", "Out Of Season" }));
+        add(inseason, new org.netbeans.lib.awtextra.AbsoluteConstraints(271, 113, 134, 80));
 
         useThis.setText("Use this Property");
         useThis.addActionListener(new java.awt.event.ActionListener() {
@@ -51,39 +55,10 @@ public class StartupOptions extends javax.swing.JPanel {
                 useThisActionPerformed(evt);
             }
         });
+        add(useThis, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 211, 395, 65));
 
         done.setText("Done/Continue To Game");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(useThis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(crop, 0, 251, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(inseason, 0, 134, Short.MAX_VALUE)))
-                .addGap(18, 18, 18)
-                .addComponent(done, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(184, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(113, 113, 113)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(crop, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
-                            .addComponent(inseason))
-                        .addGap(18, 18, 18)
-                        .addComponent(useThis, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(done, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(324, 324, 324))
-        );
+        add(done, new org.netbeans.lib.awtextra.AbsoluteConstraints(423, 113, 193, 163));
     }// </editor-fold>//GEN-END:initComponents
 
     private void cropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cropActionPerformed

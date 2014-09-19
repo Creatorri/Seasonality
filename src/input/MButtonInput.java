@@ -40,9 +40,14 @@ public class MButtonInput {
                 Seasonality.s.render();
                 return;
             }
-            if (command.equalsIgnoreCase("Quit")) {
+            if (command.equalsIgnoreCase("Edit Settings")) {
                 Seasonality.s.dispose();
+                Seasonality.s = null;
+                Thread.sleep(10);
                 Seasonality.s = new Seasonality();
+                Seasonality.o.repaint();
+                Thread.sleep(10);
+                Seasonality.o.repaint();
                 return;
             }
         }

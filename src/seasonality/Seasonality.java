@@ -80,18 +80,19 @@ public class Seasonality extends JFrame {
         addMouseMotionListener(mi);
         setVisible(true);
         //Inits and Adds
-        o = new StartupOptions();
+        if(mmp==null) mmp = new MainMenuPanel();
+        mmp.setVisible(false);
+        add(mmp);
+        if(gp==null) gp = new Gameplay();
+        gp.setVisible(false);
+        add(gp);
+        es = new EndScreen();
+        if(o==null) o = new StartupOptions();
         o.setVisible(true);
         add(o);
         o.done.setEnabled(false);
         o.updateUI();
-        mmp = new MainMenuPanel();
-        mmp.setVisible(false);
-        add(mmp);
-        gp = new Gameplay();
-        gp.setVisible(false);
-        add(gp);
-        es = new EndScreen();
+        o.setFocusable(true);
         //Allows User To Continue
         o.done.setEnabled(true);
     }

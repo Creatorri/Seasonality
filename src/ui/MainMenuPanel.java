@@ -41,7 +41,7 @@ public class MainMenuPanel extends JPanel {
         Seasonality.buttons.get(Seasonality.buttons.size() - 1).setVisible(true);
         Seasonality.buttons.get(Seasonality.buttons.size() - 1).addListener(Seasonality.mbi);
         
-        Seasonality.buttons.add(new MButton("Quit", this));
+        Seasonality.buttons.add(new MButton("Edit Settings", this));
         Seasonality.placeX.add(0.5);
         Seasonality.placeY.add(0.65);
         Seasonality.sizeX.add(0.2);
