@@ -42,7 +42,7 @@ public class MButtonInput {
             }
             if (command.equalsIgnoreCase("Quit")) {
                 Seasonality.s.dispose();
-                System.exit(0);
+                Seasonality.s = new Seasonality();
                 return;
             }
         }

@@ -69,18 +69,19 @@ public enum Crops {
     public static Crops[] editableCrops(){
         int j = 0;
         for (Crops value : Crops.values()) {
-            if (value.forceSeason == Season.NEVER) {
+            if (value.forceSeason != Season.NEVER) {
                 j++;
             }
         }
         Crops[] edit = new Crops[j];
         j = 0;
         for (Crops value : Crops.values()) {
-            if (value.forceSeason == Season.NEVER) {
+            if (value.forceSeason != Season.NEVER) {
                 edit[j] = value;
                 j++;
             }
         }
+        System.out.println("DONE");
         return edit;
     }
 
